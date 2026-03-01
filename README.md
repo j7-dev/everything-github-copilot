@@ -17,11 +17,11 @@ Battle-tested workflows for software development: planning, TDD, security review
 
 ```bash
 # Install from GitHub
-copilot plugin install your-org/everything-copilot-cli
+copilot plugin install j7-dev/everything-github-copilot
 
 # OR install from local clone
-git clone https://github.com/your-org/everything-copilot-cli.git
-cd everything-copilot-cli
+git clone https://github.com/j7-dev/everything-github-copilot.git
+cd everything-github-copilot
 copilot plugin install ./
 
 # Verify installation
