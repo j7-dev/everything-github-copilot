@@ -1,0 +1,93 @@
+{
+  "version": 1,
+  "hooks": {
+    "preToolUse": [
+      {
+        "type": "command",
+        "bash": "node scripts/hooks/pre-write-doc-warn.js",
+        "powershell": "node scripts/hooks/pre-write-doc-warn.js",
+        "cwd": ".",
+        "timeoutSec": 10,
+        "description": "Doc file warning: warn about non-standard documentation files (toolName==edit only, handled inside script)"
+      },
+      {
+        "type": "command",
+        "bash": "node scripts/hooks/suggest-compact.js",
+        "powershell": "node scripts/hooks/suggest-compact.js",
+        "cwd": ".",
+        "timeoutSec": 10,
+        "description": "Suggest manual compaction at logical intervals (toolName==edit, handled inside script)"
+      },
+      {
+        "type": "command",
+        "bash": "node -e \"const i=JSON.parse(require('fs').readFileSync('/dev/stdin','utf8'));const cmd=(JSON.parse(i.toolArgs||'{}').command||'');if(i.toolName==='bash'&&/git push/.test(cmd)){process.stderr.write('[Hook] Reminder: review changes before push\\n')}\"",
+        "powershell": "node -e \"const i=JSON.parse(require('fs').readFileSync(0,'utf8'));const cmd=(JSON.parse(i.toolArgs||'{}').command||'');if(i.toolName==='bash'&&/git push/.test(cmd)){process.stderr.write('[Hook] Reminder: review changes before push\\n')}\"",
+        "cwd": ".",
+        "timeoutSec": 5,
+        "description": "Reminder before git push to review changes"
+      }
+    ],
+    "postToolUse": [
+      {
+        "type": "command",
+        "bash": "node scripts/hooks/post-edit-format.js",
+        "powershell": "node scripts/hooks/post-edit-format.js",
+        "cwd": ".",
+        "timeoutSec": 30,
+        "description": "Auto-format JS/TS files after edits (auto-detects Biome or Prettier; toolName==edit, handled inside script)"
+      },
+      {
+        "type": "command",
+        "bash": "node scripts/hooks/post-edit-typecheck.js",
+        "powershell": "node scripts/hooks/post-edit-typecheck.js",
+        "cwd": ".",
+        "timeoutSec": 60,
+        "description": "TypeScript check after editing .ts/.tsx files (toolName==edit, handled inside script)"
+      },
+      {
+        "type": "command",
+        "bash": "node scripts/hooks/post-edit-console-warn.js",
+        "powershell": "node scripts/hooks/post-edit-console-warn.js",
+        "cwd": ".",
+        "timeoutSec": 10,
+        "description": "Warn about console.log statements after edits (toolName==edit, handled inside script)"
+      },
+      {
+        "type": "command",
+        "bash": "node scripts/hooks/check-console-log.js",
+        "powershell": "node scripts/hooks/check-console-log.js",
+        "cwd": ".",
+        "timeoutSec": 10,
+        "description": "Check for console.log in modified files after each tool use"
+      }
+    ],
+    "sessionStart": [
+      {
+        "type": "command",
+        "bash": "node scripts/hooks/session-start.js",
+        "powershell": "node scripts/hooks/session-start.js",
+        "cwd": ".",
+        "timeoutSec": 15,
+        "description": "Load previous context and detect package manager on new session"
+      }
+    ],
+    "sessionEnd": [
+      {
+        "type": "command",
+        "bash": "node scripts/hooks/session-end.js",
+        "powershell": "node scripts/hooks/session-end.js",
+        "cwd": ".",
+        "timeoutSec": 15,
+        "description": "Persist session state on end"
+      },
+      {
+        "type": "command",
+        "bash": "node scripts/hooks/evaluate-session.js",
+        "powershell": "node scripts/hooks/evaluate-session.js",
+        "cwd": ".",
+        "timeoutSec": 30,
+        "description": "Evaluate session for extractable patterns"
+      }
+    ]
+  }
+}
