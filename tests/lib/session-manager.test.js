@@ -1161,7 +1161,7 @@ src/main.ts
     const origHome = process.env.HOME;
     const origUserProfile = process.env.USERPROFILE;
     try {
-      // Point HOME to a dir with no .claude/sessions/
+      // Point HOME to a dir with no .copilot/sessions/
       process.env.HOME = tmpDir;
       process.env.USERPROFILE = tmpDir;
       // Re-require to pick up new HOME
@@ -1189,7 +1189,7 @@ src/main.ts
     const origHome = process.env.HOME;
     const origUserProfile = process.env.USERPROFILE;
     try {
-      // Point HOME to a dir with no .claude/sessions/
+      // Point HOME to a dir with no .copilot/sessions/
       process.env.HOME = tmpDir;
       process.env.USERPROFILE = tmpDir;
       // Re-require to pick up new HOME
@@ -2365,7 +2365,7 @@ file.ts
     const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'r122-old-format-'));
     const origHome = process.env.HOME;
     const origUserProfile = process.env.USERPROFILE;
-    const origDir = process.env.CLAUDE_DIR;
+    const origDir = process.env.COPILOT_DIR;
     try {
       // Set up isolated environment
       const claudeDir = path.join(tmpDir, '.claude');
@@ -2373,7 +2373,7 @@ file.ts
       fs.mkdirSync(sessionsDir, { recursive: true });
       process.env.HOME = tmpDir;
       process.env.USERPROFILE = tmpDir; // Windows: os.homedir() uses USERPROFILE
-      delete process.env.CLAUDE_DIR;
+      delete process.env.COPILOT_DIR;
 
       // Clear require cache for fresh module with new HOME
       delete require.cache[require.resolve('../../scripts/lib/utils')];
@@ -2400,7 +2400,7 @@ file.ts
       process.env.HOME = origHome;
       if (origUserProfile !== undefined) process.env.USERPROFILE = origUserProfile;
       else delete process.env.USERPROFILE;
-      if (origDir) process.env.CLAUDE_DIR = origDir;
+      if (origDir) process.env.COPILOT_DIR = origDir;
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       delete require.cache[require.resolve('../../scripts/lib/session-manager')];
       fs.rmSync(tmpDir, { recursive: true, force: true });
@@ -2490,7 +2490,7 @@ file.ts
     // No validation or normalization occurs on the date parameter.
     const origHome = process.env.HOME;
     const origUserProfile = process.env.USERPROFILE;
-    const origDir = process.env.CLAUDE_DIR;
+    const origDir = process.env.COPILOT_DIR;
     const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'r124-date-format-'));
     const homeDir = path.join(tmpDir, 'home');
     fs.mkdirSync(path.join(homeDir, '.claude', 'sessions'), { recursive: true });
@@ -2498,7 +2498,7 @@ file.ts
     try {
       process.env.HOME = homeDir;
       process.env.USERPROFILE = homeDir; // Windows: os.homedir() uses USERPROFILE
-      delete process.env.CLAUDE_DIR;
+      delete process.env.COPILOT_DIR;
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       delete require.cache[require.resolve('../../scripts/lib/session-manager')];
       const freshSM = require('../../scripts/lib/session-manager');
@@ -2538,7 +2538,7 @@ file.ts
       process.env.HOME = origHome;
       if (origUserProfile !== undefined) process.env.USERPROFILE = origUserProfile;
       else delete process.env.USERPROFILE;
-      if (origDir) process.env.CLAUDE_DIR = origDir;
+      if (origDir) process.env.COPILOT_DIR = origDir;
       delete require.cache[require.resolve('../../scripts/lib/utils')];
       delete require.cache[require.resolve('../../scripts/lib/session-manager')];
       fs.rmSync(tmpDir, { recursive: true, force: true });

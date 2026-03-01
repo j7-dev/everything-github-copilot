@@ -28,7 +28,7 @@ dist/
 __pycache__/
 *.pyc
 
-# Task files (Claude Code teams)
+# Task files (Copilot CLI teams)
 tasks/
 
 # Personal configs (if any)

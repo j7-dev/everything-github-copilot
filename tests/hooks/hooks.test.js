@@ -238,7 +238,7 @@ async function runTests() {
     await runScript(path.join(scriptsDir, 'session-end.js'));
 
     // Check if session file was created
-    // Note: Without CLAUDE_SESSION_ID, falls back to project name (not 'default')
+    // Note: Without COPILOT_SESSION_ID, falls back to project name (not 'default')
     // Use local time to match the script's getDateString() function
     const sessionsDir = path.join(os.homedir(), '.claude', 'sessions');
     const now = new Date();
@@ -258,7 +258,7 @@ async function runTests() {
 
     // Run with custom session ID
     await runScript(path.join(scriptsDir, 'session-end.js'), '', {
-      CLAUDE_SESSION_ID: testSessionId
+      COPILOT_SESSION_ID: testSessionId
     });
 
     // Check if session file was created with session ID
@@ -342,7 +342,7 @@ async function runTests() {
 
   if (await asyncTest('runs without error', async () => {
     const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-      CLAUDE_SESSION_ID: 'test-session-' + Date.now()
+      COPILOT_SESSION_ID: 'test-session-' + Date.now()
     });
     assert.strictEqual(result.code, 0, `Exit code should be 0, got ${result.code}`);
   })) passed++; else failed++;
@@ -353,7 +353,7 @@ async function runTests() {
     // Run multiple times
     for (let i = 0; i < 3; i++) {
       await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId
+        COPILOT_SESSION_ID: sessionId
       });
     }
 
@@ -374,7 +374,7 @@ async function runTests() {
     fs.writeFileSync(counterFile, '49');
 
     const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-      CLAUDE_SESSION_ID: sessionId,
+      COPILOT_SESSION_ID: sessionId,
       COMPACT_THRESHOLD: '50'
     });
 
@@ -394,7 +394,7 @@ async function runTests() {
     fs.writeFileSync(counterFile, '10');
 
     const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-      CLAUDE_SESSION_ID: sessionId,
+      COPILOT_SESSION_ID: sessionId,
       COMPACT_THRESHOLD: '50'
     });
 
@@ -414,7 +414,7 @@ async function runTests() {
     fs.writeFileSync(counterFile, '74');
 
     const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-      CLAUDE_SESSION_ID: sessionId,
+      COPILOT_SESSION_ID: sessionId,
       COMPACT_THRESHOLD: '50'
     });
 
@@ -433,7 +433,7 @@ async function runTests() {
     fs.writeFileSync(counterFile, 'not-a-number');
 
     const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-      CLAUDE_SESSION_ID: sessionId
+      COPILOT_SESSION_ID: sessionId
     });
 
     assert.strictEqual(result.code, 0, 'Should handle corrupted counter gracefully');
@@ -447,7 +447,7 @@ async function runTests() {
 
   if (await asyncTest('uses default session ID when no env var', async () => {
     const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-      CLAUDE_SESSION_ID: '' // Empty, should use 'default'
+      COPILOT_SESSION_ID: '' // Empty, should use 'default'
     });
 
     assert.strictEqual(result.code, 0, 'Should work with default session ID');
@@ -465,7 +465,7 @@ async function runTests() {
     fs.writeFileSync(counterFile, '49');
 
     const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-      CLAUDE_SESSION_ID: sessionId,
+      COPILOT_SESSION_ID: sessionId,
       COMPACT_THRESHOLD: '-5' // Invalid: negative
     });
 
@@ -880,7 +880,7 @@ async function runTests() {
     cleanupTestDir(testDir);
   })) passed++; else failed++;
 
-  if (await asyncTest('uses CLAUDE_TRANSCRIPT_PATH env var as fallback', async () => {
+  if (await asyncTest('uses COPILOT_TRANSCRIPT_PATH env var as fallback', async () => {
     const testDir = createTestDir();
     const transcriptPath = path.join(testDir, 'transcript.jsonl');
 
@@ -891,7 +891,7 @@ async function runTests() {
 
     // Send invalid JSON to stdin so it falls back to env var
     const result = await runScript(path.join(scriptsDir, 'session-end.js'), 'not json', {
-      CLAUDE_TRANSCRIPT_PATH: transcriptPath
+      COPILOT_TRANSCRIPT_PATH: transcriptPath
     });
     assert.strictEqual(result.code, 0, 'Should use env var fallback');
     cleanupTestDir(testDir);
@@ -1093,11 +1093,11 @@ async function runTests() {
     cleanupTestDir(testDir);
   })) passed++; else failed++;
 
-  if (await asyncTest('parses Claude Code JSONL format (entry.message.content)', async () => {
+  if (await asyncTest('parses Copilot CLI JSONL format (entry.message.content)', async () => {
     const testDir = createTestDir();
     const transcriptPath = path.join(testDir, 'transcript.jsonl');
 
-    // Claude Code v2.1.41+ JSONL format: user messages nested in entry.message
+    // Copilot CLI JSONL format: user messages nested in entry.message
     const lines = [
       '{"type":"user","message":{"role":"user","content":"Fix the build error"}}',
       '{"type":"user","message":{"role":"user","content":[{"type":"text","text":"Also update tests"}]}}',
@@ -1126,7 +1126,7 @@ async function runTests() {
     const testDir = createTestDir();
     const transcriptPath = path.join(testDir, 'transcript.jsonl');
 
-    // Claude Code JSONL: tool uses nested in assistant message content array
+    // Copilot CLI JSONL: tool uses nested in assistant message content array
     const lines = [
       '{"type":"user","content":"Edit the config"}',
       JSON.stringify({
@@ -1205,7 +1205,7 @@ async function runTests() {
     }
   })) passed++; else failed++;
 
-  if (test('script references use CLAUDE_PLUGIN_ROOT variable', () => {
+  if (test('script references use COPILOT_PLUGIN_ROOT variable', () => {
     const hooksPath = path.join(__dirname, '..', '..', 'hooks', 'hooks.json');
     const hooks = JSON.parse(fs.readFileSync(hooksPath, 'utf8'));
 
@@ -1213,11 +1213,11 @@ async function runTests() {
       for (const entry of hookArray) {
         for (const hook of entry.hooks) {
           if (hook.type === 'command' && hook.command.includes('scripts/hooks/')) {
-            // Check for the literal string "${CLAUDE_PLUGIN_ROOT}" in the command
-            const hasPluginRoot = hook.command.includes('${CLAUDE_PLUGIN_ROOT}');
+            // Check for the literal string "${COPILOT_PLUGIN_ROOT}" in the command
+            const hasPluginRoot = hook.command.includes('${COPILOT_PLUGIN_ROOT}');
             assert.ok(
               hasPluginRoot,
-              `Script paths should use CLAUDE_PLUGIN_ROOT: ${hook.command.substring(0, 80)}...`
+              `Script paths should use COPILOT_PLUGIN_ROOT: ${hook.command.substring(0, 80)}...`
             );
           }
         }
@@ -1232,17 +1232,19 @@ async function runTests() {
   // plugin.json validation
   console.log('\nplugin.json Validation:');
 
-  if (test('plugin.json does NOT have explicit hooks declaration', () => {
-    // Claude Code automatically loads hooks/hooks.json by convention.
-    // Explicitly declaring it in plugin.json causes a duplicate detection error.
-    // See: https://github.com/affaan-m/everything-claude-code/issues/103
-    const pluginPath = path.join(__dirname, '..', '..', '.claude-plugin', 'plugin.json');
+  if (test('plugin.json hooks field points to valid hooks file', () => {
+    // Official Copilot CLI docs show "hooks" as a valid plugin.json field.
+    // See: https://docs.github.com/en/copilot/how-tos/copilot-cli/customize-copilot/plugins-creating
+    const pluginPath = path.join(__dirname, '..', '..', 'plugin.json');
     const plugin = JSON.parse(fs.readFileSync(pluginPath, 'utf8'));
 
-    assert.ok(
-      !plugin.hooks,
-      'plugin.json should NOT have "hooks" field - Claude Code auto-loads hooks/hooks.json'
-    );
+    if (plugin.hooks) {
+      const hooksPath = path.join(__dirname, '..', '..', plugin.hooks);
+      assert.ok(
+        fs.existsSync(hooksPath),
+        `plugin.json hooks field "${plugin.hooks}" should point to an existing file`
+      );
+    }
   })) passed++; else failed++;
 
   // ─── evaluate-session.js tests ───
@@ -1297,7 +1299,7 @@ async function runTests() {
     const result = await runScript(
       path.join(scriptsDir, 'evaluate-session.js'),
       'not json at all',
-      { CLAUDE_TRANSCRIPT_PATH: '' }
+      { COPILOT_TRANSCRIPT_PATH: '' }
     );
     // No valid transcript path from either source → exit 0
     assert.strictEqual(result.code, 0);
@@ -1312,14 +1314,14 @@ async function runTests() {
     try {
       // First invocation → count = 1
       await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId
+        COPILOT_SESSION_ID: sessionId
       });
       let val = parseInt(fs.readFileSync(counterFile, 'utf8').trim(), 10);
       assert.strictEqual(val, 1, 'First call should write count 1');
 
       // Second invocation → count = 2
       await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId
+        COPILOT_SESSION_ID: sessionId
       });
       val = parseInt(fs.readFileSync(counterFile, 'utf8').trim(), 10);
       assert.strictEqual(val, 2, 'Second call should write count 2');
@@ -1335,7 +1337,7 @@ async function runTests() {
       // Pre-seed counter at threshold - 1 so next call hits threshold
       fs.writeFileSync(counterFile, '4');
       const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId,
+        COPILOT_SESSION_ID: sessionId,
         COMPACT_THRESHOLD: '5'
       });
       assert.strictEqual(result.code, 0);
@@ -1353,7 +1355,7 @@ async function runTests() {
       // (30 - 5) % 25 === 0 → should trigger periodic suggestion
       fs.writeFileSync(counterFile, '29');
       const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId,
+        COPILOT_SESSION_ID: sessionId,
         COMPACT_THRESHOLD: '5'
       });
       assert.strictEqual(result.code, 0);
@@ -1369,7 +1371,7 @@ async function runTests() {
     try {
       fs.writeFileSync(counterFile, '2');
       const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId,
+        COPILOT_SESSION_ID: sessionId,
         COMPACT_THRESHOLD: '50'
       });
       assert.strictEqual(result.code, 0);
@@ -1387,7 +1389,7 @@ async function runTests() {
       // Write a value that passes Number.isFinite() but exceeds 1000000 clamp
       fs.writeFileSync(counterFile, '999999999999');
       const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId
+        COPILOT_SESSION_ID: sessionId
       });
       assert.strictEqual(result.code, 0);
       // Should reset to 1 because 999999999999 > 1000000
@@ -1404,7 +1406,7 @@ async function runTests() {
     try {
       fs.writeFileSync(counterFile, '-42');
       const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId
+        COPILOT_SESSION_ID: sessionId
       });
       assert.strictEqual(result.code, 0);
       const newCount = parseInt(fs.readFileSync(counterFile, 'utf8').trim(), 10);
@@ -1420,7 +1422,7 @@ async function runTests() {
     try {
       fs.writeFileSync(counterFile, '49');
       const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId,
+        COPILOT_SESSION_ID: sessionId,
         COMPACT_THRESHOLD: '0'
       });
       assert.strictEqual(result.code, 0);
@@ -1437,7 +1439,7 @@ async function runTests() {
       // Pre-seed at 49 so next call = 50 (the fallback default)
       fs.writeFileSync(counterFile, '49');
       const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId,
+        COPILOT_SESSION_ID: sessionId,
         COMPACT_THRESHOLD: 'not-a-number'
       });
       assert.strictEqual(result.code, 0);
@@ -1673,7 +1675,7 @@ async function runTests() {
 
     const result = await runScript(path.join(scriptsDir, 'session-end.js'), '', {
       HOME: testDir, USERPROFILE: testDir,
-      CLAUDE_SESSION_ID: `session-${shortId}`
+      COPILOT_SESSION_ID: `session-${shortId}`
     });
     assert.strictEqual(result.code, 0);
 
@@ -1708,7 +1710,7 @@ async function runTests() {
     const stdinJson = JSON.stringify({ transcript_path: transcriptPath });
     const result = await runScript(path.join(scriptsDir, 'session-end.js'), stdinJson, {
       HOME: testDir, USERPROFILE: testDir,
-      CLAUDE_SESSION_ID: `session-${shortId}`
+      COPILOT_SESSION_ID: `session-${shortId}`
     });
     assert.strictEqual(result.code, 0);
 
@@ -1739,7 +1741,7 @@ async function runTests() {
     const stdinJson = JSON.stringify({ transcript_path: transcriptPath });
     const result = await runScript(path.join(scriptsDir, 'session-end.js'), stdinJson, {
       HOME: testDir, USERPROFILE: testDir,
-      CLAUDE_SESSION_ID: `session-${shortId}`
+      COPILOT_SESSION_ID: `session-${shortId}`
     });
     assert.strictEqual(result.code, 0);
 
@@ -1830,7 +1832,7 @@ async function runTests() {
   if (await asyncTest('extracts tool_use from assistant message content blocks', async () => {
     const testDir = createTestDir();
     const transcriptPath = path.join(testDir, 'transcript.jsonl');
-    // Claude Code JSONL format: tool_use blocks inside assistant message content array
+    // Copilot CLI JSONL format: tool_use blocks inside assistant message content array
     const lines = [
       '{"type":"user","content":"Edit config"}',
       JSON.stringify({
@@ -1877,7 +1879,7 @@ async function runTests() {
       // Pre-seed at 37 so next call = 38 (13 + 25 = 38)
       fs.writeFileSync(counterFile, '37');
       const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId,
+        COPILOT_SESSION_ID: sessionId,
         COMPACT_THRESHOLD: '13'
       });
       assert.strictEqual(result.code, 0);
@@ -1895,7 +1897,7 @@ async function runTests() {
     try {
       fs.writeFileSync(counterFile, '49');
       const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId,
+        COPILOT_SESSION_ID: sessionId,
         COMPACT_THRESHOLD: '13'
       });
       assert.strictEqual(result.code, 0);
@@ -1912,7 +1914,7 @@ async function runTests() {
       // Write non-numeric data to trigger parseInt → NaN → reset to 1
       fs.writeFileSync(counterFile, 'corrupted data here!!!');
       const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId
+        COPILOT_SESSION_ID: sessionId
       });
       assert.strictEqual(result.code, 0);
       const newCount = parseInt(fs.readFileSync(counterFile, 'utf8').trim(), 10);
@@ -1929,7 +1931,7 @@ async function runTests() {
       // 1000000 is the upper clamp boundary — should still increment
       fs.writeFileSync(counterFile, '1000000');
       const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId
+        COPILOT_SESSION_ID: sessionId
       });
       assert.strictEqual(result.code, 0);
       const newCount = parseInt(fs.readFileSync(counterFile, 'utf8').trim(), 10);
@@ -2798,7 +2800,7 @@ async function runTests() {
 
     try {
       const result = await runScript(path.join(scriptsDir, 'session-end.js'), oversizedPayload, {
-        CLAUDE_TRANSCRIPT_PATH: transcriptPath
+        COPILOT_TRANSCRIPT_PATH: transcriptPath
       });
       assert.strictEqual(result.code, 0, 'Should exit 0 even with oversized stdin');
       // Truncated JSON → JSON.parse throws → falls back to env var → creates session file
@@ -2846,7 +2848,7 @@ async function runTests() {
 
     try {
       const result = await runScript(path.join(scriptsDir, 'suggest-compact.js'), '', {
-        CLAUDE_SESSION_ID: sessionId
+        COPILOT_SESSION_ID: sessionId
       });
       assert.strictEqual(result.code, 0,
         'Should exit 0 even when counter file path is a directory (graceful fallback)');
@@ -3131,7 +3133,7 @@ async function runTests() {
     try {
       const result = await new Promise((resolve, reject) => {
         const env = { ...process.env, HOME: isoHome, USERPROFILE: isoHome };
-        delete env.CLAUDE_PACKAGE_MANAGER; // Remove any env-level PM override
+        delete env.COPILOT_PACKAGE_MANAGER; // Remove any env-level PM override
         const proc = spawn('node', [path.join(scriptsDir, 'session-start.js')], {
           env,
           cwd: isoProject, // CWD with no package.json or lock files

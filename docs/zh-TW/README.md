@@ -110,7 +110,7 @@ cp -r everything-copilot-cli/rules/* ~/.copilot/rules/
 
 外掛程式會自動偵測您偏好的套件管理器（npm、pnpm、yarn 或 bun），優先順序如下：
 
-1. **環境變數**：`CLAUDE_PACKAGE_MANAGER`
+1. **環境變數**：`COPILOT_PACKAGE_MANAGER`
 2. **專案設定**：`.copilot/package-manager.json`
 3. **package.json**：`packageManager` 欄位
 4. **鎖定檔案**：從 package-lock.json、yarn.lock、pnpm-lock.yaml 或 bun.lockb 偵測
@@ -121,7 +121,7 @@ cp -r everything-copilot-cli/rules/* ~/.copilot/rules/
 
 ```bash
 # 透過環境變數
-export CLAUDE_PACKAGE_MANAGER=pnpm
+export COPILOT_PACKAGE_MANAGER=pnpm
 
 # 透過全域設定
 node scripts/setup-package-manager.js --global pnpm
@@ -143,7 +143,7 @@ node scripts/setup-package-manager.js --detect
 
 ```
 everything-copilot-cli/
-|-- .claude-plugin/   # 外掛程式和市集清單
+|-- plugin.json       # 外掛程式和市集清單
 |   |-- plugin.json         # 外掛程式中繼資料和元件路徑
 |   |-- marketplace.json    # 用於 /plugin marketplace add 的市集目錄
 |
@@ -322,7 +322,7 @@ cp -r everything-copilot-cli/skills/* ~/.copilot/skills/
 
 #### 設定 MCP
 
-將 `mcp-configs/mcp-servers.json` 中所需的 MCP 伺服器複製到您的 `~/.claude.json`。
+將 `mcp-configs/mcp-servers.json` 中所需的 MCP 伺服器複製到您的 `~/.copilot.json`。
 
 **重要：** 將 `YOUR_*_HERE` 佔位符替換為您實際的 API 金鑰。
 

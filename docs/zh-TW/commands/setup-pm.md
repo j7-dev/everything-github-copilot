@@ -27,7 +27,7 @@ node scripts/setup-package-manager.js --list
 
 決定使用哪個套件管理器時，按以下順序檢查：
 
-1. **環境變數**：`CLAUDE_PACKAGE_MANAGER`
+1. **環境變數**：`COPILOT_PACKAGE_MANAGER`
 2. **專案設定**：`.copilot/package-manager.json`
 3. **package.json**：`packageManager` 欄位
 4. **Lock 檔案**：是否存在 package-lock.json、yarn.lock、pnpm-lock.yaml 或 bun.lockb
@@ -61,14 +61,14 @@ node scripts/setup-package-manager.js --list
 
 ## 環境變數
 
-設定 `CLAUDE_PACKAGE_MANAGER` 以覆蓋所有其他偵測方法：
+設定 `COPILOT_PACKAGE_MANAGER` 以覆蓋所有其他偵測方法：
 
 ```bash
 # Windows (PowerShell)
-$env:CLAUDE_PACKAGE_MANAGER = "pnpm"
+$env:COPILOT_PACKAGE_MANAGER = "pnpm"
 
 # macOS/Linux
-export CLAUDE_PACKAGE_MANAGER=pnpm
+export COPILOT_PACKAGE_MANAGER=pnpm
 ```
 
 ## 執行偵測

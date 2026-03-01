@@ -133,7 +133,7 @@ async function main() {
     transcriptPath = input.transcript_path;
   } catch {
     // Fallback: try env var for backwards compatibility
-    transcriptPath = process.env.CLAUDE_TRANSCRIPT_PATH;
+    transcriptPath = process.env.COPILOT_TRANSCRIPT_PATH;
   }
 
   const sessionsDir = getSessionsDir();

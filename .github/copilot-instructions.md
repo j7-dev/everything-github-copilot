@@ -2,7 +2,7 @@
 
 ## Available Agents
 
-Located in `~/.claude/agents/`:
+Located in `~/.copilot/agents/`:
 
 | Agent | Purpose | When to Use |
 |-------|---------|-------------|
@@ -152,7 +152,7 @@ The Feature Implementation Workflow describes the development pipeline: research
 
 Types: feat, fix, refactor, docs, test, chore, perf, ci
 
-Note: Attribution disabled globally via ~/.claude/settings.json.
+Note: Attribution disabled globally via ~/.copilot/settings.json.
 
 ## Pull Request Workflow
 
@@ -240,7 +240,7 @@ Extended thinking is enabled by default, reserving up to 31,999 tokens for inter
 
 Control extended thinking via:
 - **Toggle**: Option+T (macOS) / Alt+T (Windows/Linux)
-- **Config**: Set `alwaysThinkingEnabled` in `~/.claude/settings.json`
+- **Config**: Set `alwaysThinkingEnabled` in `~/.copilot/settings.json`
 - **Budget cap**: `export MAX_THINKING_TOKENS=10000`
 - **Verbose mode**: Ctrl+O to see thinking output
 

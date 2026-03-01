@@ -6,7 +6,7 @@ alwaysApply: true
 
 ## Available Agents
 
-Located in `~/.claude/agents/`:
+Located in `~/.copilot/agents/`:
 
 | Agent | Purpose | When to Use |
 |-------|---------|-------------|

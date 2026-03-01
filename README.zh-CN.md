@@ -1,4 +1,4 @@
-# Everything Claude Code
+# Everything Copilot CLI
 
 [![Stars](https://img.shields.io/github/stars/affaan-m/everything-claude-code?style=flat)](https://github.com/affaan-m/everything-claude-code/stargazers)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
@@ -13,13 +13,13 @@
 
 **🌐 Language / 语言 / 語言**
 
-[**English**](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](docs/zh-TW/README.md) | [日本語](docs/ja-JP/README.md)
+[**English**](README.md) | [简体中文](README.zh-CN.md) | [繁體中文](README.zh-TW.md) | [日本語](docs/ja-JP/README.md)
 
 </div>
 
 ---
 
-**来自 Anthropic 黑客马拉松获胜者的完整 Claude Code 配置集合。**
+**来自 Anthropic 黑客马拉松获胜者的完整 Copilot CLI 配置集合。**
 
 生产级代理、技能、钩子、命令、规则和 MCP 配置，经过 10 多个月构建真实产品的密集日常使用而演化。
 
@@ -33,12 +33,12 @@
 <tr>
 <td width="50%">
 <a href="https://x.com/affaanmustafa/status/2012378465664745795">
-<img src="https://github.com/user-attachments/assets/1a471488-59cc-425b-8345-5245c7efbcef" alt="The Shorthand Guide to Everything Claude Code" />
+<img src="https://github.com/user-attachments/assets/1a471488-59cc-425b-8345-5245c7efbcef" alt="The Shorthand Guide to Everything Copilot CLI" />
 </a>
 </td>
 <td width="50%">
 <a href="https://x.com/affaanmustafa/status/2014040193557471352">
-<img src="https://github.com/user-attachments/assets/c9ca43bc-b149-427f-b551-af6840c368f0" alt="The Longform Guide to Everything Claude Code" />
+<img src="https://github.com/user-attachments/assets/c9ca43bc-b149-427f-b551-af6840c368f0" alt="The Longform Guide to Everything Copilot CLI" />
 </a>
 </td>
 </tr>
@@ -75,14 +75,14 @@
 
 ### 第二步：安装规则（必需）
 
-> ⚠️ **重要提示：** Claude Code 插件无法自动分发 `rules`，需要手动安装：
+> ⚠️ **重要提示：** Copilot CLI 插件无法自动分发 `rules`，需要手动安装：
 
 ```bash
 # 首先克隆仓库
 git clone https://github.com/affaan-m/everything-claude-code.git
 
 # 复制规则（应用于所有项目）
-cp -r everything-claude-code/rules/* ~/.claude/rules/
+cp -r everything-claude-code/rules/* ~/.copilot/rules/
 ```
 
 ### 第三步：开始使用
@@ -110,18 +110,18 @@ cp -r everything-claude-code/rules/* ~/.claude/rules/
 
 插件自动检测你首选的包管理器（npm、pnpm、yarn 或 bun），优先级如下：
 
-1. **环境变量**: `CLAUDE_PACKAGE_MANAGER`
-2. **项目配置**: `.claude/package-manager.json`
+1. **环境变量**: `COPILOT_PACKAGE_MANAGER`
+2. **项目配置**: `.copilot/package-manager.json`
 3. **package.json**: `packageManager` 字段
 4. **锁文件**: 从 package-lock.json、yarn.lock、pnpm-lock.yaml 或 bun.lockb 检测
-5. **全局配置**: `~/.claude/package-manager.json`
+5. **全局配置**: `~/.copilot/package-manager.json`
 6. **回退**: 第一个可用的包管理器
 
 要设置你首选的包管理器：
 
 ```bash
 # 通过环境变量
-export CLAUDE_PACKAGE_MANAGER=pnpm
+export COPILOT_PACKAGE_MANAGER=pnpm
 
 # 通过全局配置
 node scripts/setup-package-manager.js --global pnpm
@@ -133,17 +133,17 @@ node scripts/setup-package-manager.js --project bun
 node scripts/setup-package-manager.js --detect
 ```
 
-或在 Claude Code 中使用 `/setup-pm` 命令。
+或在 Copilot CLI 中使用 `/setup-pm` 命令。
 
 ---
 
 ## 📦 里面有什么
 
-这个仓库是一个 **Claude Code 插件** - 直接安装或手动复制组件。
+这个仓库是一个 **Copilot CLI 插件** - 直接安装或手动复制组件。
 
 ```
 everything-claude-code/
-|-- .claude-plugin/   # 插件和市场清单
+|-- .copilot-plugin/  # 插件和市场清单
 |   |-- plugin.json         # 插件元数据和组件路径
 |   |-- marketplace.json    # /plugin marketplace add 的市场目录
 |
@@ -196,7 +196,7 @@ everything-claude-code/
 |   |-- instinct-export.md  # /instinct-export - 导出直觉（新增）
 |   |-- evolve.md           # /evolve - 将直觉聚类到技能中（新增）
 |
-|-- rules/            # 始终遵循的指南（复制到 ~/.claude/rules/）
+|-- rules/            # 始终遵循的指南（复制到 ~/.copilot/rules/）
 |   |-- security.md         # 强制性安全检查
 |   |-- coding-style.md     # 不可变性、文件组织
 |   |-- testing.md          # TDD、80% 覆盖率要求
@@ -247,7 +247,7 @@ everything-claude-code/
 
 ### 技能创建器
 
-两种从你的仓库生成 Claude Code 技能的方法：
+两种从你的仓库生成 Copilot CLI 技能的方法：
 
 #### 选项 A：本地分析（内置）
 
@@ -274,7 +274,7 @@ everything-claude-code/
 ```
 
 两个选项都创建：
-- **SKILL.md 文件** - 可直接用于 Claude Code 的技能
+- **SKILL.md 文件** - 可直接用于 Copilot CLI 的技能
 - **直觉集合** - 用于 continuous-learning-v2
 - **模式提取** - 从你的提交历史中学习
 
@@ -297,7 +297,7 @@ everything-claude-code/
 
 ### 选项 1：作为插件安装（推荐）
 
-使用此仓库的最简单方法 - 作为 Claude Code 插件安装：
+使用此仓库的最简单方法 - 作为 Copilot CLI 插件安装：
 
 ```bash
 # 将此仓库添加为市场
@@ -307,7 +307,7 @@ everything-claude-code/
 /plugin install everything-claude-code@everything-claude-code
 ```
 
-或直接添加到你的 `~/.claude/settings.json`：
+或直接添加到你的 `~/.copilot/settings.json`：
 
 ```json
 {
@@ -327,18 +327,18 @@ everything-claude-code/
 
 这让你可以立即访问所有命令、代理、技能和钩子。
 
-> **注意：** Claude Code 插件系统不支持通过插件分发 `rules`（[上游限制](https://code.claude.com/docs/en/plugins-reference)）。你需要手动安装规则：
+> **注意：** Copilot CLI 插件系统不支持通过插件分发 `rules`（上游限制）。你需要手动安装规则：
 >
 > ```bash
 > # 首先克隆仓库
 > git clone https://github.com/affaan-m/everything-claude-code.git
 >
 > # 选项 A：用户级规则（应用于所有项目）
-> cp -r everything-claude-code/rules/* ~/.claude/rules/
+> cp -r everything-claude-code/rules/* ~/.copilot/rules/
 >
 > # 选项 B：项目级规则（仅应用于当前项目）
-> mkdir -p .claude/rules
-> cp -r everything-claude-code/rules/* .claude/rules/
+> mkdir -p .copilot/rules
+> cp -r everything-claude-code/rules/* .copilot/rules/
 > ```
 
 ---
@@ -351,26 +351,26 @@ everything-claude-code/
 # 克隆仓库
 git clone https://github.com/affaan-m/everything-claude-code.git
 
-# 将代理复制到你的 Claude 配置
-cp everything-claude-code/agents/*.md ~/.claude/agents/
+# 将代理复制到你的 Copilot 配置
+cp everything-claude-code/agents/*.md ~/.copilot/agents/
 
 # 复制规则
-cp everything-claude-code/rules/*.md ~/.claude/rules/
+cp everything-claude-code/rules/*.md ~/.copilot/rules/
 
 # 复制命令
-cp everything-claude-code/commands/*.md ~/.claude/commands/
+cp everything-claude-code/commands/*.md ~/.copilot/commands/
 
 # 复制技能
-cp -r everything-claude-code/skills/* ~/.claude/skills/
+cp -r everything-claude-code/skills/* ~/.copilot/skills/
 ```
 
 #### 将钩子添加到 settings.json
 
-将 `hooks/hooks.json` 中的钩子复制到你的 `~/.claude/settings.json`。
+将 `hooks/hooks.json` 中的钩子复制到你的 `~/.copilot/settings.json`。
 
 #### 配置 MCP
 
-将所需的 MCP 服务器从 `mcp-configs/mcp-servers.json` 复制到你的 `~/.claude.json`。
+将所需的 MCP 服务器从 `mcp-configs/mcp-servers.json` 复制到你的 `~/.copilot.json`。
 
 **重要：** 将 `YOUR_*_HERE` 占位符替换为你的实际 API 密钥。
 
@@ -426,7 +426,7 @@ model: opus
 规则是始终遵循的指南。保持模块化：
 
 ```
-~/.claude/rules/
+~/.copilot/rules/
   security.md      # 无硬编码秘密
   coding-style.md  # 不可变性、文件限制
   testing.md       # TDD、覆盖率要求
@@ -474,7 +474,7 @@ node tests/hooks/hooks.test.js
 
 ## 📖 背景
 
-自实验性推出以来，我一直在使用 Claude Code。2025 年 9 月，与 [@DRodriguezFX](https://x.com/DRodriguezFX) 一起使用 Claude Code 构建 [zenith.chat](https://zenith.chat)，赢得了 Anthropic x Forum Ventures 黑客马拉松。
+自实验性推出以来，我一直在使用 Copilot CLI。2025 年 9 月，与 [@DRodriguezFX](https://x.com/DRodriguezFX) 一起使用 Copilot CLI 构建 [zenith.chat](https://zenith.chat)，赢得了 Anthropic x Forum Ventures 黑客马拉松。
 
 这些配置在多个生产应用中经过了实战测试。
 
@@ -511,8 +511,8 @@ node tests/hooks/hooks.test.js
 
 ## 🔗 链接
 
-- **精简指南（从这里开始）：** [The Shorthand Guide to Everything Claude Code](https://x.com/affaanmustafa/status/2012378465664745795)
-- **详细指南（高级）：** [The Longform Guide to Everything Claude Code](https://x.com/affaanmustafa/status/2014040193557471352)
+- **精简指南（从这里开始）：** [The Shorthand Guide to Everything Copilot CLI](https://x.com/affaanmustafa/status/2012378465664745795)
+- **详细指南（高级）：** [The Longform Guide to Everything Copilot CLI](https://x.com/affaanmustafa/status/2014040193557471352)
 - **关注：** [@affaanmustafa](https://x.com/affaanmustafa)
 - **zenith.chat:** [zenith.chat](https://zenith.chat)
 - **技能目录：** awesome-agent-skills（社区维护的智能体技能目录）

@@ -259,9 +259,9 @@ function runTests() {
   })) passed++; else failed++;
 
   // ── Round 53: env var fallback path ──
-  console.log('\nRound 53: CLAUDE_TRANSCRIPT_PATH fallback:');
+  console.log('\nRound 53: COPILOT_TRANSCRIPT_PATH fallback:');
 
-  if (test('falls back to CLAUDE_TRANSCRIPT_PATH env var when stdin is invalid JSON', () => {
+  if (test('falls back to COPILOT_TRANSCRIPT_PATH env var when stdin is invalid JSON', () => {
     const testDir = createTestDir();
     const transcript = createTranscript(testDir, 15);
 
@@ -269,7 +269,7 @@ function runTests() {
       encoding: 'utf8',
       input: 'invalid json {{{',
       timeout: 10000,
-      env: { ...process.env, CLAUDE_TRANSCRIPT_PATH: transcript }
+      env: { ...process.env, COPILOT_TRANSCRIPT_PATH: transcript }
     });
 
     assert.strictEqual(result.status, 0, 'Should exit 0');

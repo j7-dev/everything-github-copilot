@@ -1,6 +1,6 @@
 # Plugins and Marketplaces
 
-Plugins extend Claude Code with new tools and capabilities. This guide covers installation only - see the [full article](https://x.com/affaanmustafa/status/2012378465664745795) for when and why to use them.
+Plugins extend Copilot CLI with new tools and capabilities. This guide covers installation only - see the [full article](https://x.com/affaanmustafa/status/2012378465664745795) for when and why to use them.
 
 ---
 
@@ -12,18 +12,18 @@ Marketplaces are repositories of installable plugins.
 
 ```bash
 # Add official Anthropic marketplace
-claude plugin marketplace add https://github.com/anthropics/claude-plugins-official
+copilot plugin marketplace add https://github.com/anthropics/copilot-plugins-official
 
 # Add community marketplaces
-claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
+copilot plugin marketplace add https://github.com/mixedbread-ai/mgrep
 ```
 
 ### Recommended Marketplaces
 
 | Marketplace | Source |
 |-------------|--------|
-| claude-plugins-official | `anthropics/claude-plugins-official` |
-| claude-code-plugins | `anthropics/claude-code` |
+| copilot-plugins-official | `anthropics/copilot-plugins-official` |
+| copilot-code-plugins | `anthropics/copilot-code` |
 | Mixedbread-Grep | `mixedbread-ai/mgrep` |
 
 ---
@@ -35,7 +35,7 @@ claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
 /plugins
 
 # Or install directly
-claude plugin install typescript-lsp@claude-plugins-official
+copilot plugin install typescript-lsp@copilot-plugins-official
 ```
 
 ### Recommended Plugins
@@ -66,8 +66,8 @@ claude plugin install typescript-lsp@claude-plugins-official
 
 ```bash
 # Add marketplaces
-claude plugin marketplace add https://github.com/anthropics/claude-plugins-official
-claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
+copilot plugin marketplace add https://github.com/anthropics/copilot-plugins-official
+copilot plugin marketplace add https://github.com/mixedbread-ai/mgrep
 
 # Open /plugins and install what you need
 ```
@@ -77,7 +77,7 @@ claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
 ## Plugin Files Location
 
 ```
-~/.claude/plugins/
+~/.copilot/plugins/
 |-- cache/                    # Downloaded plugins
 |-- installed_plugins.json    # Installed list
 |-- known_marketplaces.json   # Added marketplaces

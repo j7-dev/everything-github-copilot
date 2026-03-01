@@ -12,7 +12,7 @@
 
 ```bash
 # 公式 Anthropic マーケットプレイスを追加
-claude plugin marketplace add https://github.com/anthropics/claude-plugins-official
+claude plugin marketplace add https://github.com/anthropics/copilot-plugins-official
 
 # コミュニティマーケットプレイスを追加
 claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
@@ -22,7 +22,7 @@ claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
 
 | マーケットプレイス | ソース |
 |-------------|--------|
-| claude-plugins-official | `anthropics/claude-plugins-official` |
+| copilot-plugins-official | `anthropics/copilot-plugins-official` |
 | copilot-cli-plugins | `anthropics/copilot-cli` |
 | Mixedbread-Grep | `mixedbread-ai/mgrep` |
 
@@ -35,7 +35,7 @@ claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
 /plugins
 
 # または直接インストール
-claude plugin install typescript-lsp@claude-plugins-official
+claude plugin install typescript-lsp@copilot-plugins-official
 ```
 
 ### 推奨プラグイン
@@ -66,7 +66,7 @@ claude plugin install typescript-lsp@claude-plugins-official
 
 ```bash
 # マーケットプレイスを追加
-claude plugin marketplace add https://github.com/anthropics/claude-plugins-official
+claude plugin marketplace add https://github.com/anthropics/copilot-plugins-official
 claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
 
 # /pluginsを開き、必要なものをインストール

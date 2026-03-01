@@ -152,7 +152,7 @@ cp -r everything-copilot-cli/rules/golang/* ~/.copilot/rules/
 
 插件会自动检测您首选的包管理器（npm、pnpm、yarn 或 bun），优先级如下：
 
-1. **环境变量**：`CLAUDE_PACKAGE_MANAGER`
+1. **环境变量**：`COPILOT_PACKAGE_MANAGER`
 2. **项目配置**：`.copilot/package-manager.json`
 3. **package.json**：`packageManager` 字段
 4. **锁文件**：从 package-lock.json、yarn.lock、pnpm-lock.yaml 或 bun.lockb 检测
@@ -163,7 +163,7 @@ cp -r everything-copilot-cli/rules/golang/* ~/.copilot/rules/
 
 ```bash
 # Via environment variable
-export CLAUDE_PACKAGE_MANAGER=pnpm
+export COPILOT_PACKAGE_MANAGER=pnpm
 
 # Via global config
 node scripts/setup-package-manager.js --global pnpm
@@ -185,7 +185,7 @@ node scripts/setup-package-manager.js --detect
 
 ```
 everything-copilot-cli/
-|-- .claude-plugin/   # 插件和插件市场清单
+|-- plugin.json       # 插件和插件市场清单
 |   |-- plugin.json         # 插件元数据和组件路径
 |   |-- marketplace.json    # 用于 /plugin marketplace add 的市场目录
 |
@@ -403,7 +403,7 @@ claude --version
 
 ### 重要提示：钩子自动加载行为
 
-> ⚠️ **对于贡献者：** 请勿向 `.claude-plugin/plugin.json` 添加 `"hooks"` 字段。这由回归测试强制执行。
+> ⚠️ **对于贡献者：** 请勿向 `plugin.json` 添加 `"hooks"` 字段。这由回归测试强制执行。
 
 Copilot CLI v2.1+ **会自动加载** 任何已安装插件中的 `hooks/hooks.json`（按约定）。在 `plugin.json` 中显式声明会导致重复检测错误：
 
@@ -500,7 +500,7 @@ cp -r everything-copilot-cli/skills/* ~/.copilot/skills/
 
 #### 配置 MCPs
 
-将 `mcp-configs/mcp-servers.json` 中所需的 MCP 服务器复制到你的 `~/.claude.json`。
+将 `mcp-configs/mcp-servers.json` 中所需的 MCP 服务器复制到你的 `~/.copilot.json`。
 
 **重要：** 将 `YOUR_*_HERE` 占位符替换为你实际的 API 密钥。
 

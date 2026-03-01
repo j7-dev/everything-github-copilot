@@ -52,16 +52,16 @@ function runTests() {
 
   console.log('Storage:');
 
-  if (test('getClawDir() returns path ending in .claude/claw', () => {
+  if (test('getClawDir() returns path ending in .copilot/claw', () => {
     const dir = getClawDir();
     assert.ok(dir.endsWith(path.join('.claude', 'claw')),
-      `Expected path ending in .claude/claw, got: ${dir}`);
+      `Expected path ending in .copilot/claw, got: ${dir}`);
   })) passed++; else failed++;
 
   if (test('getSessionPath("foo") returns correct .md path', () => {
     const p = getSessionPath('foo');
     assert.ok(p.endsWith(path.join('.claude', 'claw', 'foo.md')),
-      `Expected path ending in .claude/claw/foo.md, got: ${p}`);
+      `Expected path ending in .copilot/claw/foo.md, got: ${p}`);
   })) passed++; else failed++;
 
   if (test('listSessions() returns empty array for empty dir', () => {

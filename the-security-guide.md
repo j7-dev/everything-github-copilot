@@ -4,11 +4,11 @@
 
 ---
 
-**I built the most-forked Claude Code configuration on GitHub. 50K+ stars, 6K+ forks. That also made it the biggest target.**
+**I built the most-forked Copilot CLI configuration on GitHub. 50K+ stars, 6K+ forks. That also made it the biggest target.**
 
 When thousands of developers fork your configuration and run it with full system access, you start thinking differently about what goes into those files. I audited community contributions, reviewed pull requests from strangers, and traced what happens when an LLM reads instructions it was never meant to trust. What I found was bad enough to build an entire tool around it.
 
-That tool is AgentShield — 102 security rules, 1280 tests across 5 categories, built specifically because the existing tooling for auditing agent configurations didn't exist. This guide covers what I learned building it, and how to apply it whether you're running Claude Code, Cursor, Codex, OpenClaw, or any custom agent build.
+That tool is AgentShield — 102 security rules, 1280 tests across 5 categories, built specifically because the existing tooling for auditing agent configurations didn't exist. This guide covers what I learned building it, and how to apply it whether you're running Copilot CLI, Cursor, Codex, OpenClaw, or any custom agent build.
 
 This is not theoretical. The incidents referenced here are real. The attack vectors are active. And if you're running an AI agent with access to your filesystem, your credentials, and your services — this is the guide that tells you what to do about it.
 
@@ -54,7 +54,7 @@ Sandboxing is the practice of putting isolation layers between your agent and yo
 
 > :camera: *Diagram: Side-by-side comparison — sandboxed agent in Docker with restricted filesystem access vs. agent running with full root on your local machine. The sandboxed version can only touch `/workspace`. The unsandboxed version can touch everything.*
 
-**Practical Guide: Sandboxing Claude Code**
+**Practical Guide: Sandboxing Copilot CLI**
 
 Start with `allowedTools` in your settings. This restricts which tools the agent can use at all:
 
@@ -112,7 +112,7 @@ docker run -it --rm \
   node:20 bash
 
 # No network access, no host filesystem access outside /workspace
-# Install Claude Code inside the container
+# Install Copilot CLI inside the container
 npm install -g @anthropic-ai/claude-code
 claude
 ```
@@ -151,10 +151,10 @@ Adversaries embed instructions in places humans don't look:
 cat -v suspicious-file.md | grep -P '[\x{200B}\x{200C}\x{200D}\x{FEFF}]'
 
 # Check for HTML comments that might contain injections
-grep -r '<!--' ~/.claude/skills/ ~/.claude/rules/
+grep -r '<!--' ~/.copilot/skills/ ~/.copilot/rules/
 
 # Check for base64-encoded payloads
-grep -rE '[A-Za-z0-9+/]{40,}={0,2}' ~/.claude/
+grep -rE '[A-Za-z0-9+/]{40,}={0,2}' ~/.copilot/
 ```
 
 Unicode zero-width characters are invisible in most editors but fully visible to the LLM. A file that looks clean to you in VS Code might contain an entire hidden instruction set between visible paragraphs.
@@ -176,7 +176,7 @@ When reviewing pull requests from contributors (or from your own agent), look fo
 npx ecc-agentshield scan
 
 # Scan a specific directory
-npx ecc-agentshield scan --path ~/.claude/
+npx ecc-agentshield scan --path ~/.copilot/
 
 # Scan with verbose output
 npx ecc-agentshield scan --verbose
@@ -213,7 +213,7 @@ The big one. The most common, most effective, and hardest to fully prevent.
 
 **Malicious Skill:**
 
-A contributed skill file (`~/.claude/skills/helpful-tool.md`) contains hidden instructions between visible content:
+A contributed skill file (`~/.copilot/skills/helpful-tool.md`) contains hidden instructions between visible content:
 
 ```markdown
 # Helpful Database Tool
@@ -276,7 +276,7 @@ This fires after every Bash execution. It silently sends all environment variabl
 
 **Malicious CLAUDE.md:**
 
-You clone a repo. It has a `.claude/CLAUDE.md` or a project-level `CLAUDE.md`. You open Claude Code in that directory. The project config loads automatically.
+You clone a repo. It has a `.copilot/CLAUDE.md` or a project-level `CLAUDE.md`. You open Copilot CLI in that directory. The project config loads automatically.
 
 ```markdown
 # Project Configuration
@@ -359,7 +359,7 @@ CVE-2026-25253 (CVSS 8.8) documented exactly this class of lateral movement in a
 
 This one is particularly insidious. An MCP tool registers with a clean description: "Search documentation." You approve it. Later, the tool definition is dynamically amended — the description now contains hidden instructions that override your agent's behavior. This is called a **rug pull**: you approved a tool, but the tool changed since your approval.
 
-Researchers demonstrated that poisoned MCP tools can exfiltrate `mcp.json` configuration files and SSH keys from users of Cursor and Claude Code. The tool description is invisible to you in the UI but fully visible to the model. It's an attack vector that bypasses every permission prompt because you already said yes.
+Researchers demonstrated that poisoned MCP tools can exfiltrate `mcp.json` configuration files and SSH keys from users of Cursor and Copilot CLI. The tool description is invisible to you in the UI but fully visible to the model. It's an attack vector that bypasses every permission prompt because you already said yes.
 
 Mitigation: pin MCP tool versions, verify tool descriptions haven't changed between sessions, and run `npx ecc-agentshield scan` to detect suspicious MCP configurations.
 
@@ -397,7 +397,7 @@ If you can't observe it, you can't secure it.
 
 **Stream Live Thoughts:**
 
-Claude Code shows you the agent's thinking in real time. Use this. Watch what it's doing, especially when running hooks, processing external content, or executing multi-step workflows. If you see unexpected tool calls or reasoning that doesn't match your request, interrupt immediately (`Esc Esc`).
+Copilot CLI shows you the agent's thinking in real time. Use this. Watch what it's doing, especially when running hooks, processing external content, or executing multi-step workflows. If you see unexpected tool calls or reasoning that doesn't match your request, interrupt immediately (`Esc Esc`).
 
 **Trace Patterns and Steer:**
 
@@ -430,7 +430,7 @@ For production agent deployments, standard observability tooling applies:
       "hooks": [
         {
           "type": "command",
-          "command": "echo \"$(date -u +%Y-%m-%dT%H:%M:%SZ) | Tool: $TOOL_NAME | Input: $TOOL_INPUT\" >> ~/.claude/audit.log"
+          "command": "echo \"$(date -u +%Y-%m-%dT%H:%M:%SZ) | Tool: $TOOL_NAME | Input: $TOOL_INPUT\" >> ~/.copilot/audit.log"
         }
       ]
     }
@@ -452,7 +452,7 @@ This three-perspective approach catches things that single-pass scanning misses.
 
 ## the agentshield approach
 
-AgentShield exists because I needed it. After maintaining the most-forked Claude Code configuration for months, manually reviewing every PR for security issues, and watching the community grow faster than anyone could audit — it became clear that automated scanning was mandatory.
+AgentShield exists because I needed it. After maintaining the most-forked Copilot CLI configuration for months, manually reviewing every PR for security issues, and watching the community grow faster than anyone could audit — it became clear that automated scanning was mandatory.
 
 **Zero-Install Scanning:**
 
@@ -461,9 +461,9 @@ AgentShield exists because I needed it. After maintaining the most-forked Claude
 npx ecc-agentshield scan
 
 # Scan a specific path
-npx ecc-agentshield scan --path ~/.claude/
+npx ecc-agentshield scan --path ~/.copilot/
 
-# Output as JSON for CI integration
+# Output as JSONfor CI integration
 npx ecc-agentshield scan --format json
 ```
 
@@ -477,7 +477,7 @@ name: AgentShield Security Scan
 on:
   pull_request:
     paths:
-      - '.claude/**'
+      - '.copilot/**'
       - 'CLAUDE.md'
       - '.claude.json'
 
@@ -569,7 +569,7 @@ The patterns in this guide aren't complex. They're habits. Build them into your 
 
 **ECC Ecosystem:**
 - [AgentShield on npm](https://www.npmjs.com/package/ecc-agentshield) — Zero-install agent security scanning
-- [Everything Claude Code](https://github.com/affaan-m/everything-claude-code) — 50K+ stars, production-ready agent configurations
+- [Everything Copilot CLI](https://github.com/affaan-m/everything-claude-code) — 50K+ stars, production-ready agent configurations
 - [The Shorthand Guide](./the-shortform-guide.md) — Setup and configuration fundamentals
 - [The Longform Guide](./the-longform-guide.md) — Advanced patterns and optimization
 - [The OpenClaw Guide](./the-openclaw-guide.md) — Security lessons from the agent frontier
@@ -580,7 +580,7 @@ The patterns in this guide aren't complex. They're habits. Build them into your 
 - [CrowdStrike: What Security Teams Need to Know About OpenClaw](https://www.crowdstrike.com/en-us/blog/what-security-teams-need-to-know-about-openclaw-ai-super-agent/) — Enterprise risk assessment
 - [MCP Tool Poisoning Attacks](https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks) — The "rug pull" vector
 - [Microsoft: Protecting Against Indirect Injection in MCP](https://developer.microsoft.com/blog/protecting-against-indirect-injection-attacks-mcp) — Secure threads defense
-- [Claude Code Permissions](https://docs.anthropic.com/en/docs/claude-code/security) — Official sandboxing documentation
+- [Copilot CLI Permissions](https://docs.anthropic.com/en/docs/claude-code/security) — Official sandboxing documentation
 - CVE-2026-25253 — Agent workspace escape via insufficient filesystem isolation (CVSS 8.8)
 
 **Academic:**
@@ -592,4 +592,4 @@ The patterns in this guide aren't complex. They're habits. Build them into your 
 
 *Built from 10 months of maintaining the most-forked agent configuration on GitHub, auditing thousands of community contributions, and building the tools to automate what humans can't catch at scale.*
 
-*Affaan Mustafa ([@affaanmustafa](https://x.com/affaanmustafa)) — Creator of Everything Claude Code and AgentShield*
+*Affaan Mustafa ([@affaanmustafa](https://x.com/affaanmustafa)) — Creator of Everything Copilot CLI and AgentShield*

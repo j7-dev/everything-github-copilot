@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# install.sh — Install claude rules while preserving directory structure.
+# install.sh — Install copilot rules while preserving directory structure.
 #
 # Usage:
-#   ./install.sh [--target <claude|cursor>] <language> [<language> ...]
+#   ./install.sh [--target <copilot|cursor>] <language> [<language> ...]
 #
 # Examples:
 #   ./install.sh typescript
@@ -11,7 +11,7 @@
 #   ./install.sh --target cursor typescript python golang
 #
 # Targets:
-#   claude  (default) — Install rules to ~/.claude/rules/
+#   copilot  (default) — Install rules to ~/.copilot/rules/
 #   cursor  — Install rules, agents, skills, commands, and MCP to ./.cursor/
 #
 # This script copies rules into the target directory keeping the common/ and
@@ -34,27 +34,27 @@ SCRIPT_DIR="$(cd "$(dirname "$SCRIPT_PATH")" && pwd)"
 RULES_DIR="$SCRIPT_DIR/rules"
 
 # --- Parse --target flag ---
-TARGET="claude"
+TARGET="copilot"
 if [[ "${1:-}" == "--target" ]]; then
     if [[ -z "${2:-}" ]]; then
-        echo "Error: --target requires a value (claude or cursor)" >&2
+        echo "Error: --target requires a value (copilot or cursor)" >&2
         exit 1
     fi
     TARGET="$2"
     shift 2
 fi
 
-if [[ "$TARGET" != "claude" && "$TARGET" != "cursor" ]]; then
-    echo "Error: unknown target '$TARGET'. Must be 'claude' or 'cursor'." >&2
+if [[ "$TARGET" != "copilot" && "$TARGET" != "cursor" ]]; then
+    echo "Error: unknown target '$TARGET'. Must be 'copilot' or 'cursor'." >&2
     exit 1
 fi
 
 # --- Usage ---
 if [[ $# -eq 0 ]]; then
-    echo "Usage: $0 [--target <claude|cursor>] <language> [<language> ...]"
+    echo "Usage: $0 [--target <copilot|cursor>] <language> [<language> ...]"
     echo ""
     echo "Targets:"
-    echo "  claude  (default) — Install rules to ~/.claude/rules/"
+    echo "  copilot  (default) — Install rules to ~/.copilot/rules/"
     echo "  cursor  — Install rules, agents, skills, commands, and MCP to ./.cursor/"
     echo ""
     echo "Available languages:"
@@ -66,9 +66,9 @@ if [[ $# -eq 0 ]]; then
     exit 1
 fi
 
-# --- Claude target (existing behavior) ---
-if [[ "$TARGET" == "claude" ]]; then
-    DEST_DIR="${CLAUDE_RULES_DIR:-$HOME/.claude/rules}"
+# --- Copilot target (existing behavior) ---
+if [[ "$TARGET" == "copilot" ]]; then
+    DEST_DIR="${COPILOT_RULES_DIR:-$HOME/.copilot/rules}"
 
     # Warn if destination already exists (user may have local customizations)
     if [[ -d "$DEST_DIR" ]] && [[ "$(ls -A "$DEST_DIR" 2>/dev/null)" ]]; then

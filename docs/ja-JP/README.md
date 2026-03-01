@@ -155,7 +155,7 @@ cp -r everything-copilot-cli/rules/golang/* ~/.copilot/rules/
 
 プラグインは、以下の優先順位で、お好みのパッケージマネージャー（npm、pnpm、yarn、bun）を自動検出します：
 
-1. **環境変数**: `CLAUDE_PACKAGE_MANAGER`
+1. **環境変数**: `COPILOT_PACKAGE_MANAGER`
 2. **プロジェクト設定**: `.copilot/package-manager.json`
 3. **package.json**: `packageManager` フィールド
 4. **ロックファイル**: package-lock.json、yarn.lock、pnpm-lock.yaml、bun.lockb から検出
@@ -166,7 +166,7 @@ cp -r everything-copilot-cli/rules/golang/* ~/.copilot/rules/
 
 ```bash
 # 環境変数経由
-export CLAUDE_PACKAGE_MANAGER=pnpm
+export COPILOT_PACKAGE_MANAGER=pnpm
 
 # グローバル設定経由
 node scripts/setup-package-manager.js --global pnpm
@@ -188,7 +188,7 @@ node scripts/setup-package-manager.js --detect
 
 ```
 everything-copilot-cli/
-|-- .claude-plugin/   # プラグインとマーケットプレイスマニフェスト
+|-- plugin.json       # プラグインとマーケットプレイスマニフェスト
 |   |-- plugin.json         # プラグインメタデータとコンポーネントパス
 |   |-- marketplace.json    # /plugin marketplace add 用のマーケットプレイスカタログ
 |
@@ -404,7 +404,7 @@ claude --version
 
 ### 重要: フック自動読み込み動作
 
-> ⚠️ **貢献者向け:** `.claude-plugin/plugin.json`に`"hooks"`フィールドを追加しないでください。これは回帰テストで強制されます。
+> ⚠️ **貢献者向け:** `plugin.json`に`"hooks"`フィールドを追加しないでください。これは回帰テストで強制されます。
 
 Copilot CLI v2.1+は、インストール済みプラグインの`hooks/hooks.json`（規約）を自動読み込みします。`plugin.json`で明示的に宣言するとエラーが発生します：
 
@@ -501,7 +501,7 @@ cp -r everything-copilot-cli/skills/* ~/.copilot/skills/
 
 #### MCP を設定
 
-`mcp-configs/mcp-servers.json` から必要な MCP サーバーを `~/.claude.json` にコピーします。
+`mcp-configs/mcp-servers.json` から必要な MCP サーバーを `~/.copilot.json` にコピーします。
 
 **重要:** `YOUR_*_HERE`プレースホルダーを実際のAPIキーに置き換えてください。
 

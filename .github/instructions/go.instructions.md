@@ -2,12 +2,6 @@
 applyTo: "**/*.go"
 ---
 
----
-paths:
-  - "**/*.go"
-  - "**/go.mod"
-  - "**/go.sum"
----
 # Go Coding Style
 
 > This file extends [common/coding-style.md](../common/coding-style.md) with Go specific content.
@@ -35,14 +29,7 @@ if err != nil {
 
 See skill: `golang-patterns` for comprehensive Go idioms and patterns.
 
----
 
----
-paths:
-  - "**/*.go"
-  - "**/go.mod"
-  - "**/go.sum"
----
 # Go Patterns
 
 > This file extends [common/patterns.md](../common/patterns.md) with Go specific content.
@@ -83,14 +70,7 @@ func NewUserService(repo UserRepository, logger Logger) *UserService {
 
 See skill: `golang-patterns` for comprehensive Go patterns including concurrency, error handling, and package organization.
 
----
 
----
-paths:
-  - "**/*.go"
-  - "**/go.mod"
-  - "**/go.sum"
----
 # Go Security
 
 > This file extends [common/security.md](../common/security.md) with Go specific content.
@@ -120,14 +100,7 @@ ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
 defer cancel()
 ```
 
----
 
----
-paths:
-  - "**/*.go"
-  - "**/go.mod"
-  - "**/go.sum"
----
 # Go Testing
 
 > This file extends [common/testing.md](../common/testing.md) with Go specific content.
@@ -153,5 +126,3 @@ go test -cover ./...
 ## Reference
 
 See skill: `golang-testing` for detailed Go testing patterns and helpers.
-
----

@@ -27,7 +27,7 @@ node scripts/setup-package-manager.js --list
 
 When determining which package manager to use, the following order is checked:
 
-1. **Environment variable**: `CLAUDE_PACKAGE_MANAGER`
+1. **Environment variable**: `COPILOT_PACKAGE_MANAGER`
 2. **Project config**: `.copilot/package-manager.json`
 3. **package.json**: `packageManager` field
 4. **Lock file**: Presence of package-lock.json, yarn.lock, pnpm-lock.yaml, or bun.lockb
@@ -61,14 +61,14 @@ When determining which package manager to use, the following order is checked:
 
 ## Environment Variable
 
-Set `CLAUDE_PACKAGE_MANAGER` to override all other detection methods:
+Set `COPILOT_PACKAGE_MANAGER` to override all other detection methods:
 
 ```bash
 # Windows (PowerShell)
-$env:CLAUDE_PACKAGE_MANAGER = "pnpm"
+$env:COPILOT_PACKAGE_MANAGER = "pnpm"
 
 # macOS/Linux
-export CLAUDE_PACKAGE_MANAGER=pnpm
+export COPILOT_PACKAGE_MANAGER=pnpm
 ```
 
 ## Run the Detection

@@ -39,7 +39,7 @@ async function asyncTest(name, fn) {
 }
 
 /**
- * Run a hook script with simulated Claude Code input
+ * Run a hook script with simulated Copilot CLI input
  * @param {string} scriptPath - Path to the hook script
  * @param {object} input - Hook input object (will be JSON stringified)
  * @param {object} env - Environment variables
@@ -66,7 +66,7 @@ function runHookWithInput(scriptPath, input = {}, env = {}, timeoutMs = 10000) {
       }
     });
 
-    // Send JSON input on stdin (simulating Claude Code hook invocation)
+    // Send JSON input on stdin (simulating Copilot CLI hook invocation)
     if (input && Object.keys(input).length > 0) {
       proc.stdin.write(JSON.stringify(input));
     }
@@ -344,7 +344,7 @@ async function runTests() {
       const result = await runHookWithInput(
         path.join(scriptsDir, 'suggest-compact.js'),
         {},
-        { CLAUDE_SESSION_ID: sessionId, COMPACT_THRESHOLD: '50' }
+        { COPILOT_SESSION_ID: sessionId, COMPACT_THRESHOLD: '50' }
       );
 
       assert.ok(
@@ -499,7 +499,7 @@ async function runTests() {
     const testDir = createTestDir();
     const transcriptPath = path.join(testDir, 'nested-transcript.jsonl');
 
-    // Claude Code JSONL format uses nested message.content arrays
+    // Copilot CLI JSONL format uses nested message.content arrays
     const lines = [
       JSON.stringify({ type: 'user', message: { role: 'user', content: [
         { type: 'text', text: 'Refactor the utils module' }

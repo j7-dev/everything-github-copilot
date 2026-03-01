@@ -50,9 +50,9 @@ Options:
 ```
 
 選択を `INSTALL_LEVEL` として保存します。ターゲットディレクトリを設定します：
-- User-level: `TARGET=~/.claude`
+- User-level: `TARGET=~/.copilot`
 - Project-level: `TARGET=.claude`（現在のプロジェクトルートからの相対パス）
-- Both: `TARGET_USER=~/.claude`、`TARGET_PROJECT=.claude`
+- Both: `TARGET_USER=~/.copilot`、`TARGET_PROJECT=.copilot`
 
 ターゲットディレクトリが存在しない場合は作成します：
 ```bash

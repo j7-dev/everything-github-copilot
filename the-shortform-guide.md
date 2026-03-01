@@ -1,10 +1,10 @@
-# The Shorthand Guide to Everything Claude Code
+# The Shorthand Guide to Everything Copilot CLI
 
-![Header: Anthropic Hackathon Winner - Tips & Tricks for Claude Code](./assets/images/shortform/00-header.png)
+![Header: Anthropic Hackathon Winner - Tips & Tricks for Copilot CLI](./assets/images/shortform/00-header.png)
 
 ---
 
-**Been an avid Claude Code user since the experimental rollout in Feb, and won the Anthropic x Forum Ventures hackathon with [zenith.chat](https://zenith.chat) alongside [@DRodriguezFX](https://x.com/DRodriguezFX) - completely using Claude Code.**
+**Been an avid Copilot CLI user since the experimental rollout in Feb, and won the Anthropic x Forum Ventures hackathon with [zenith.chat](https://zenith.chat) alongside [@DRodriguezFX](https://x.com/DRodriguezFX) - completely using Copilot CLI.**
 
 Here's my complete setup after 10 months of daily use: skills, hooks, subagents, MCPs, plugins, and what actually works.
 
@@ -21,12 +21,12 @@ After a long session of coding with Opus 4.5, you want to clean out dead code an
 
 Commands are skills executed via slash commands. They overlap but are stored differently:
 
-- **Skills**: `~/.claude/skills/` - broader workflow definitions
-- **Commands**: `~/.claude/commands/` - quick executable prompts
+- **Skills**: `~/.copilot/skills/` - broader workflow definitions
+- **Commands**: `~/.copilot/commands/` - quick executable prompts
 
 ```bash
 # Example skill structure
-~/.claude/skills/
+~/.copilot/skills/
   pmx-guidelines.md      # Project-specific patterns
   coding-standards.md    # Language best practices
   tdd-workflow/          # Multi-file skill with README.md
@@ -67,7 +67,7 @@ Hooks are trigger-based automations that fire on specific events. Unlike skills,
 ```
 
 ![PostToolUse hook feedback](./assets/images/shortform/03-posttooluse-hook.png)
-*Example of what feedback you get in Claude Code, while running a PostToolUse hook*
+*Example of what feedback you get in Copilot CLI, while running a PostToolUse hook*
 
 **Pro tip:** Use the `hookify` plugin to create hooks conversationally instead of writing JSON manually. Run `/hookify` and describe what you want.
 
@@ -81,7 +81,7 @@ Subagents work nicely with skills - a subagent capable of executing a subset of 
 
 ```bash
 # Example subagent structure
-~/.claude/agents/
+~/.copilot/agents/
   planner.md           # Feature implementation planning
   architect.md         # System design decisions
   tdd-guide.md         # Test-driven development
@@ -104,8 +104,7 @@ Your `.rules` folder holds `.md` files with best practices Claude should ALWAYS 
 2. **Rules folder** - Modular `.md` files grouped by concern
 
 ```bash
-~/.claude/rules/
-  security.md      # No hardcoded secrets, validate inputs
+~/.copilot/rules/
   coding-style.md  # Immutability, file organization
   testing.md       # TDD workflow, 80% coverage
   git-workflow.md  # Commit format, PR process
@@ -162,21 +161,21 @@ Plugins package tools for easy installation instead of tedious manual setup. A p
 
 ```bash
 # Add a marketplace
-claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
+copilot plugin marketplace add https://github.com/mixedbread-ai/mgrep
 
-# Open Claude, run /plugins, find new marketplace, install from there
+# Open Copilot CLI, run /plugins, find new marketplace, install from there
 ```
 
 ![Marketplaces tab showing mgrep](./assets/images/shortform/06-marketplaces-mgrep.jpeg)
 *Displaying the newly installed Mixedbread-Grep marketplace*
 
-**LSP Plugins** are particularly useful if you run Claude Code outside editors frequently. Language Server Protocol gives Claude real-time type checking, go-to-definition, and intelligent completions without needing an IDE open.
+**LSP Plugins** are particularly useful if you run Copilot CLI outside editors frequently. Language Server Protocol gives Claude real-time type checking, go-to-definition, and intelligent completions without needing an IDE open.
 
 ```bash
 # Enabled plugins example
-typescript-lsp@claude-plugins-official  # TypeScript intelligence
-pyright-lsp@claude-plugins-official     # Python type checking
-hookify@claude-plugins-official         # Create hooks conversationally
+typescript-lsp@copilot-plugins-official  # TypeScript intelligence
+pyright-lsp@copilot-plugins-official     # Python type checking
+hookify@copilot-plugins-official         # Create hooks conversationally
 mgrep@Mixedbread-Grep                   # Better search than ripgrep
 ```
 
@@ -249,13 +248,13 @@ Use sandbox mode for risky operations - Claude runs in restricted environment wi
 
 ## On Editors
 
-Your editor choice significantly impacts Claude Code workflow. While Claude Code works from any terminal, pairing it with a capable editor unlocks real-time file tracking, quick navigation, and integrated command execution.
+Your editor choice significantly impacts Copilot CLI workflow. While Copilot CLI works from any terminal, pairing it with a capable editor unlocks real-time file tracking, quick navigation, and integrated command execution.
 
 ### Zed (My Preference)
 
 I use [Zed](https://zed.dev) - written in Rust, so it's genuinely fast. Opens instantly, handles massive codebases without breaking a sweat, and barely touches system resources.
 
-**Why Zed + Claude Code is a great combo:**
+**Why Zed + Copilot CLI is a great combo:**
 
 - **Speed** - Rust-based performance means no lag when Claude is rapidly editing files. Your editor keeps up
 - **Agent Panel Integration** - Zed's Claude integration lets you track file changes in real-time as Claude edits. Jump between files Claude references without leaving the editor
@@ -268,7 +267,7 @@ I use [Zed](https://zed.dev) - written in Rust, so it's genuinely fast. Opens in
 
 **Editor-Agnostic Tips:**
 
-1. **Split your screen** - Terminal with Claude Code on one side, editor on the other
+1. **Split your screen** - Terminal with Copilot CLI on one side, editor on the other
 2. **Ctrl + G** - quickly open the file Claude is currently working on in Zed
 3. **Auto-save** - Enable autosave so Claude's file reads are always current
 4. **Git integration** - Use editor's git features to review Claude's changes before committing
@@ -276,10 +275,10 @@ I use [Zed](https://zed.dev) - written in Rust, so it's genuinely fast. Opens in
 
 ### VSCode / Cursor
 
-This is also a viable choice and works well with Claude Code. You can use it in either terminal format, with automatic sync with your editor using `\ide` enabling LSP functionality (somewhat redundant with plugins now). Or you can opt for the extension which is more integrated with the Editor and has a matching UI.
+This is also a viable choice and works well with Copilot CLI. You can use it in either terminal format, with automatic sync with your editor using `\ide` enabling LSP functionality (somewhat redundant with plugins now). Or you can opt for the extension which is more integrated with the Editor and has a matching UI.
 
-![VS Code Claude Code Extension](./assets/images/shortform/10-vscode-extension.jpeg)
-*The VS Code extension provides a native graphical interface for Claude Code, integrated directly into your IDE.*
+![VS Code Copilot CLI Extension](./assets/images/shortform/10-vscode-extension.jpeg)
+*The VS Code extension provides a native graphical interface for Copilot CLI, integrated directly into your IDE.*
 
 ---
 
@@ -290,19 +289,19 @@ This is also a viable choice and works well with Claude Code. You can use it in 
 **Installed:** (I usually only have 4-5 of these enabled at a time)
 
 ```markdown
-ralph-wiggum@claude-code-plugins       # Loop automation
-frontend-design@claude-code-plugins    # UI/UX patterns
-commit-commands@claude-code-plugins    # Git workflow
-security-guidance@claude-code-plugins  # Security checks
-pr-review-toolkit@claude-code-plugins  # PR automation
-typescript-lsp@claude-plugins-official # TS intelligence
-hookify@claude-plugins-official        # Hook creation
-code-simplifier@claude-plugins-official
-feature-dev@claude-code-plugins
-explanatory-output-style@claude-code-plugins
-code-review@claude-code-plugins
-context7@claude-plugins-official       # Live documentation
-pyright-lsp@claude-plugins-official    # Python types
+ralph-wiggum@copilot-code-plugins       # Loop automation
+frontend-design@copilot-code-plugins    # UI/UX patterns
+commit-commands@copilot-code-plugins    # Git workflow
+security-guidance@copilot-code-plugins  # Security checks
+pr-review-toolkit@copilot-code-plugins  # PR automation
+typescript-lsp@copilot-plugins-official # TS intelligence
+hookify@copilot-plugins-official        # Hook creation
+code-simplifier@copilot-plugins-official
+feature-dev@copilot-code-plugins
+explanatory-output-style@copilot-code-plugins
+code-review@copilot-code-plugins
+context7@copilot-plugins-official       # Live documentation
+pyright-lsp@copilot-plugins-official    # Python types
 mgrep@Mixedbread-Grep                  # Better search
 ```
 
@@ -373,7 +372,7 @@ affoon:~ ctx:65% Opus 4.5 19:52
 ### Rules Structure
 
 ```
-~/.claude/rules/
+~/.copilot/rules/
   security.md      # Mandatory security checks
   coding-style.md  # Immutability, file size limits
   testing.md       # TDD, 80% coverage
@@ -387,7 +386,7 @@ affoon:~ ctx:65% Opus 4.5 19:52
 ### Subagents
 
 ```
-~/.claude/agents/
+~/.copilot/agents/
   planner.md           # Break down features
   architect.md         # System design
   tdd-guide.md         # Write tests first

@@ -6,8 +6,8 @@ set -euo pipefail
 
 VERSION="${1:-}"
 ROOT_PACKAGE_JSON="package.json"
-PLUGIN_JSON=".claude-plugin/plugin.json"
-MARKETPLACE_JSON=".claude-plugin/marketplace.json"
+PLUGIN_JSON="plugin.json"
+MARKETPLACE_JSON="marketplace.json"
 OPENCODE_PACKAGE_JSON=".opencode/package.json"
 
 # Function to show usage

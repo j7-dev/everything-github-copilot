@@ -28,7 +28,7 @@
 - 對受信任、定義明確的計畫啟用
 - 對探索性工作停用
 - 絕不使用 dangerously-skip-permissions flag
-- 改為在 `~/.claude.json` 中設定 `allowedTools`
+- 改為在 `~/.copilot.json` 中設定 `allowedTools`
 
 ## TodoWrite 最佳實務
 

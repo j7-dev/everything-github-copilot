@@ -41,6 +41,7 @@ skills/                   — 50+ workflow skills
 commands/                 — 26 slash commands
 hooks/hooks.json          — Session and tool lifecycle hooks
 .github/                  — Copilot instructions (auto-applied)
+  instructions/            — Path-specific instructions
 scripts/                  — Node.js utilities for hooks
 mcp-configs/              — MCP server configurations
 ```
@@ -109,10 +110,10 @@ Key skills available:
 The `.github/` directory contains instructions that Copilot applies automatically:
 
 - `.github/copilot-instructions.md` — Global rules applied to all files
-- `.github/typescript.instructions.md` — Applied to `**/*.ts,**/*.tsx`
-- `.github/go.instructions.md` — Applied to `**/*.go`
-- `.github/python.instructions.md` — Applied to `**/*.py`
-- `.github/swift.instructions.md` — Applied to `**/*.swift`
+- `.github/instructions/typescript.instructions.md` — Applied to `**/*.ts,**/*.tsx`
+- `.github/instructions/go.instructions.md` — Applied to `**/*.go`
+- `.github/instructions/python.instructions.md` — Applied to `**/*.py`
+- `.github/instructions/swift.instructions.md` — Applied to `**/*.swift`
 
 These are loaded automatically — no configuration needed.
 

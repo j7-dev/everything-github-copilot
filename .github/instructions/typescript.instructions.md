@@ -2,13 +2,6 @@
 applyTo: "**/*.ts,**/*.tsx"
 ---
 
----
-paths:
-  - "**/*.ts"
-  - "**/*.tsx"
-  - "**/*.js"
-  - "**/*.jsx"
----
 # TypeScript/JavaScript Coding Style
 
 > This file extends [common/coding-style.md](../common/coding-style.md) with TypeScript/JavaScript specific content.
@@ -68,15 +61,7 @@ const validated = schema.parse(input)
 - Use proper logging libraries instead
 - See hooks for automatic detection
 
----
 
----
-paths:
-  - "**/*.ts"
-  - "**/*.tsx"
-  - "**/*.js"
-  - "**/*.jsx"
----
 # TypeScript/JavaScript Patterns
 
 > This file extends [common/patterns.md](../common/patterns.md) with TypeScript/JavaScript specific content.
@@ -123,15 +108,7 @@ interface Repository<T> {
 }
 ```
 
----
 
----
-paths:
-  - "**/*.ts"
-  - "**/*.tsx"
-  - "**/*.js"
-  - "**/*.jsx"
----
 # TypeScript/JavaScript Security
 
 > This file extends [common/security.md](../common/security.md) with TypeScript/JavaScript specific content.
@@ -154,15 +131,7 @@ if (!apiKey) {
 
 - Use **security-reviewer** skill for comprehensive security audits
 
----
 
----
-paths:
-  - "**/*.ts"
-  - "**/*.tsx"
-  - "**/*.js"
-  - "**/*.jsx"
----
 # TypeScript/JavaScript Testing
 
 > This file extends [common/testing.md](../common/testing.md) with TypeScript/JavaScript specific content.
@@ -174,5 +143,3 @@ Use **Playwright** as the E2E testing framework for critical user flows.
 ## Agent Support
 
 - **e2e-runner** - Playwright E2E testing specialist
-
----

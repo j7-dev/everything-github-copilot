@@ -1,15 +1,15 @@
-# The Longform Guide to Everything Claude Code
+# The Longform Guide to Everything Copilot CLI
 
-![Header: The Longform Guide to Everything Claude Code](./assets/images/longform/01-header.png)
+![Header: The Longform Guide to Everything Copilot CLI](./assets/images/longform/01-header.png)
 
 ---
 
-> **Prerequisite**: This guide builds on [The Shorthand Guide to Everything Claude Code](./the-shortform-guide.md). Read that first if you haven't set up skills, hooks, subagents, MCPs, and plugins.
+> **Prerequisite**: This guide builds on [The Shorthand Guide to Everything Copilot CLI](./the-shortform-guide.md). Read that first if you haven't set up skills, hooks, subagents, MCPs, and plugins.
 
 ![Reference to Shorthand Guide](./assets/images/longform/02-shortform-reference.png)
 *The Shorthand Guide - read it first*
 
-In the shorthand guide, I covered the foundational setup: skills and commands, hooks, subagents, MCPs, plugins, and the configuration patterns that form the backbone of an effective Claude Code workflow. That was the setup guide and the base infrastructure.
+In the shorthand guide, I covered the foundational setup: skills and commands, hooks, subagents, MCPs, plugins, and the configuration patterns that form the backbone of an effective Copilot CLI workflow. That was the setup guide and the base infrastructure.
 
 This longform guide goes into the techniques that separate productive sessions from wasteful ones. If you haven't read the shorthand guide, go back and set up your configs first. What follows assumes you have skills, agents, hooks, and MCPs already configured and working.
 
@@ -37,7 +37,7 @@ With lazy loading, the context window issue is mostly solved. But token usage an
 
 ### Context and Memory Management
 
-For sharing memory across sessions, a skill or command that summarizes and checks in on progress then saves to a `.tmp` file in your `.claude` folder and appends to it until the end of your session is the best bet. The next day it can use that as context and pick up where you left off, create a new file for each session so you don't pollute old context into new work.
+For sharing memory across sessions, a skill or command that summarizes and checks in on progress then saves to a `.tmp` file in your `.copilot` folder and appends to it until the end of your session is the best bet. The next day it can use that as context and pick up where you left off, create a new file for each session so you don't pollute old context into new work.
 
 ![Session Storage File Tree](./assets/images/longform/03-session-storage.png)
 *Example of session storage -> https://github.com/affaan-m/everything-claude-code/tree/main/examples/sessions*
@@ -49,11 +49,11 @@ Claude creates a file summarizing current state. Review it, ask for edits if nee
 
 **Clearing Context Strategically:**
 
-Once you have your plan set and context cleared (default option in plan mode in Claude Code now), you can work from the plan. This is useful when you've accumulated a lot of exploration context that's no longer relevant to execution. For strategic compacting, disable auto compact. Manually compact at logical intervals or create a skill that does so for you.
+Once you have your plan set and context cleared (default option in plan mode in Copilot CLI now), you can work from the plan. This is useful when you've accumulated a lot of exploration context that's no longer relevant to execution. For strategic compacting, disable auto compact. Manually compact at logical intervals or create a skill that does so for you.
 
 **Advanced: Dynamic System Prompt Injection**
 
-One pattern I picked up: instead of solely putting everything in CLAUDE.md (user scope) or `.claude/rules/` (project scope) which loads every session, use CLI flags to inject context dynamically.
+One pattern I picked up: instead of solely putting everything in CLAUDE.md (user scope) or `.copilot/rules/` (project scope) which loads every session, use CLI flags to inject context dynamically.
 
 ```bash
 claude --system-prompt "$(cat memory.md)"
@@ -65,13 +65,13 @@ This lets you be more surgical about what context loads when. System prompt cont
 
 ```bash
 # Daily development
-alias claude-dev='claude --system-prompt "$(cat ~/.claude/contexts/dev.md)"'
+alias copilot-dev='copilot --system-prompt "$(cat ~/.copilot/contexts/dev.md)"'
 
 # PR review mode
-alias claude-review='claude --system-prompt "$(cat ~/.claude/contexts/review.md)"'
+alias copilot-review='copilot --system-prompt "$(cat ~/.copilot/contexts/review.md)"'
 
 # Research/exploration mode
-alias claude-research='claude --system-prompt "$(cat ~/.claude/contexts/research.md)"'
+alias copilot-research='copilot --system-prompt "$(cat ~/.copilot/contexts/research.md)"'
 ```
 
 **Advanced: Memory Persistence Hooks**
@@ -92,7 +92,7 @@ If you've had to repeat a prompt multiple times and Claude ran into the same pro
 
 **The Problem:** Wasted tokens, wasted context, wasted time.
 
-**The Solution:** When Claude Code discovers something that isn't trivial - a debugging technique, a workaround, some project-specific pattern - it saves that knowledge as a new skill. Next time a similar problem comes up, the skill gets loaded automatically.
+**The Solution:** When Copilot CLI discovers something that isn't trivial - a debugging technique, a workaround, some project-specific pattern - it saves that knowledge as a new skill. Next time a similar problem comes up, the skill gets loaded automatically.
 
 I've built a continuous learning skill that does this: `github.com/affaan-m/everything-claude-code/tree/main/skills/continuous-learning`
 
@@ -136,7 +136,7 @@ Default to Sonnet for 90% of coding tasks. Upgrade to Opus when first attempt fa
 Replace grep with mgrep - ~50% token reduction on average compared to traditional grep or ripgrep:
 
 ![mgrep Benchmark](./assets/images/longform/06-mgrep-benchmark.png)
-*In our 50-task benchmark, mgrep + Claude Code used ~2x fewer tokens than grep-based workflows at similar or better judged quality. Source: https://github.com/mixedbread-ai/mgrep*
+*In our 50-task benchmark, mgrep + Copilot CLI used ~2x fewer tokens than grep-based workflows at similar or better judged quality. Source: https://github.com/mixedbread-ai/mgrep*
 
 **Modular Codebase Benefits:**
 
@@ -207,7 +207,7 @@ IF you are to begin scaling your instances AND you have multiple instances of Cl
 
 **The Cascade Method:**
 
-When running multiple Claude Code instances, organize with a "cascade" pattern:
+When running multiple Copilot CLI instances, organize with a "cascade" pattern:
 
 - Open new tasks in new tabs to the right
 - Sweep left to right, oldest to newest
@@ -292,11 +292,11 @@ Phase 5: VERIFY (use build-error-resolver if needed) → done or loop back
 
 You can set it using `/statusline` - then Claude will say you don't have one but can set it up for you and ask what you want in it.
 
-See also: ccstatusline (community project for custom Claude Code status lines)
+See also: ccstatusline (community project for custom Copilot CLI status lines)
 
 ### Voice Transcription
 
-Talk to Claude Code with your voice. Faster than typing for many people.
+Talk to Copilot CLI with your voice. Faster than typing for many people.
 
 - superwhisper, MacWhisper on Mac
 - Even with transcription mistakes, Claude understands intent
@@ -343,7 +343,7 @@ alias q='cd ~/Desktop/projects'
 ## References
 
 - [Anthropic: Demystifying evals for AI agents](https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents)
-- [YK: 32 Claude Code Tips](https://agenticcoding.substack.com/p/32-claude-code-tips-from-basics-to)
+- [YK: 32 Copilot CLI Tips](https://agenticcoding.substack.com/p/32-claude-code-tips-from-basics-to)
 - [RLanceMartin: Session Reflection Pattern](https://rlancemartin.github.io/2025/12/01/claude_diary/)
 - @PerceptualPeak: Sub-Agent Context Negotiation
 - @menhguin: Agent Abstractions Tierlist

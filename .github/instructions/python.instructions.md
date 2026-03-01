@@ -2,11 +2,6 @@
 applyTo: "**/*.py"
 ---
 
----
-paths:
-  - "**/*.py"
-  - "**/*.pyi"
----
 # Python Coding Style
 
 > This file extends [common/coding-style.md](../common/coding-style.md) with Python specific content.
@@ -45,13 +40,7 @@ class Point(NamedTuple):
 
 See skill: `python-patterns` for comprehensive Python idioms and patterns.
 
----
 
----
-paths:
-  - "**/*.py"
-  - "**/*.pyi"
----
 # Python Patterns
 
 > This file extends [common/patterns.md](../common/patterns.md) with Python specific content.
@@ -87,13 +76,7 @@ class CreateUserRequest:
 
 See skill: `python-patterns` for comprehensive patterns including decorators, concurrency, and package organization.
 
----
 
----
-paths:
-  - "**/*.py"
-  - "**/*.pyi"
----
 # Python Security
 
 > This file extends [common/security.md](../common/security.md) with Python specific content.
@@ -120,13 +103,7 @@ api_key = os.environ["OPENAI_API_KEY"]  # Raises KeyError if missing
 
 See skill: `django-security` for Django-specific security guidelines (if applicable).
 
----
 
----
-paths:
-  - "**/*.py"
-  - "**/*.pyi"
----
 # Python Testing
 
 > This file extends [common/testing.md](../common/testing.md) with Python specific content.
@@ -160,5 +137,3 @@ def test_database_connection():
 ## Reference
 
 See skill: `python-testing` for detailed pytest patterns and fixtures.
-
----

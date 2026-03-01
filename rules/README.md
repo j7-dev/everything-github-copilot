@@ -48,13 +48,13 @@ rules/
 
 ```bash
 # Install common rules (required for all projects)
-cp -r rules/common ~/.claude/rules/common
+cp -r rules/common ~/.copilot/rules/common
 
 # Install language-specific rules based on your project's tech stack
-cp -r rules/typescript ~/.claude/rules/typescript
-cp -r rules/python ~/.claude/rules/python
-cp -r rules/golang ~/.claude/rules/golang
-cp -r rules/swift ~/.claude/rules/swift
+cp -r rules/typescript ~/.copilot/rules/typescript
+cp -r rules/python ~/.copilot/rules/python
+cp -r rules/golang ~/.copilot/rules/golang
+cp -r rules/swift ~/.copilot/rules/swift
 
 # Attention ! ! ! Configure according to your actual project requirements; the configuration here is for reference only.
 ```

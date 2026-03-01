@@ -156,7 +156,7 @@ function runTests() {
   console.log('\nenvironment variable:');
 
   if (test('detects env var override', () => {
-    const result = run(['--detect'], { CLAUDE_PACKAGE_MANAGER: 'pnpm' });
+    const result = run(['--detect'], { COPILOT_PACKAGE_MANAGER: 'pnpm' });
     assert.strictEqual(result.code, 0);
     assert.ok(result.stdout.includes('pnpm'));
   })) passed++; else failed++;
@@ -301,7 +301,7 @@ function runTests() {
   console.log('\n--detect source label (Round 62):');
 
   if (test('--detect with env var shows source as environment', () => {
-    const result = run(['--detect'], { CLAUDE_PACKAGE_MANAGER: 'pnpm' });
+    const result = run(['--detect'], { COPILOT_PACKAGE_MANAGER: 'pnpm' });
     assert.strictEqual(result.code, 0);
     assert.ok(result.stdout.includes('Source: environment'), 'Should show environment as source');
   })) passed++; else failed++;
@@ -352,7 +352,7 @@ function runTests() {
       console.log('    (skipped — /dev/null not available on Windows)');
       return;
     }
-    // HOME=/dev/null causes ensureDir to throw ENOTDIR when creating ~/.claude/
+    // HOME=/dev/null causes ensureDir to throw ENOTDIR when creating ~/.copilot/
     const result = run(['--global', 'npm'], { HOME: '/dev/null', USERPROFILE: '/dev/null' });
     assert.strictEqual(result.code, 1, `Expected exit 1, got ${result.code}`);
     assert.ok(result.stderr.includes('Error:'),
@@ -370,7 +370,7 @@ function runTests() {
     const tmpDir = path.join(os.tmpdir(), `spm-test-ro-${Date.now()}`);
     fs.mkdirSync(tmpDir, { recursive: true });
     try {
-      // Make CWD read-only so .claude/ dir creation fails with EACCES
+      // Make CWD read-only so .copilot/ dir creation fails with EACCES
       fs.chmodSync(tmpDir, 0o555);
       const result = require('child_process').spawnSync('node', [SCRIPT, '--project', 'npm'], {
         encoding: 'utf8',

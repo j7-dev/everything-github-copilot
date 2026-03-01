@@ -52,9 +52,9 @@ Options:
 
 将选择存储为 `INSTALL_LEVEL`。设置目标目录：
 
-* 用户级别：`TARGET=~/.claude`
+* 用户级别：`TARGET=~/.copilot`
 * 项目级别：`TARGET=.claude`（相对于当前项目根目录）
-* 两者：`TARGET_USER=~/.claude`，`TARGET_PROJECT=.claude`
+* 两者：`TARGET_USER=~/.copilot`，`TARGET_PROJECT=.copilot`
 
 如果目标目录不存在，则创建它们：
 

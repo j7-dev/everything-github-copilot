@@ -27,7 +27,7 @@ node scripts/setup-package-manager.js --list
 
 使用するパッケージマネージャーを決定する際、以下の順序でチェックされます:
 
-1. **環境変数**: `CLAUDE_PACKAGE_MANAGER`
+1. **環境変数**: `COPILOT_PACKAGE_MANAGER`
 2. **プロジェクト設定**: `.copilot/package-manager.json`
 3. **package.json**: `packageManager` フィールド
 4. **ロックファイル**: package-lock.json、yarn.lock、pnpm-lock.yaml、bun.lockbの存在
@@ -61,14 +61,14 @@ node scripts/setup-package-manager.js --list
 
 ## 環境変数
 
-`CLAUDE_PACKAGE_MANAGER` を設定すると、他のすべての検出方法を上書きします:
+`COPILOT_PACKAGE_MANAGER` を設定すると、他のすべての検出方法を上書きします:
 
 ```bash
 # Windows (PowerShell)
-$env:CLAUDE_PACKAGE_MANAGER = "pnpm"
+$env:COPILOT_PACKAGE_MANAGER = "pnpm"
 
 # macOS/Linux
-export CLAUDE_PACKAGE_MANAGER=pnpm
+export COPILOT_PACKAGE_MANAGER=pnpm
 ```
 
 ## 検出の実行

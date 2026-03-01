@@ -27,7 +27,7 @@ node scripts/setup-package-manager.js --list
 
 在确定使用哪个包管理器时，会按以下顺序检查：
 
-1. **环境变量**：`CLAUDE_PACKAGE_MANAGER`
+1. **环境变量**：`COPILOT_PACKAGE_MANAGER`
 2. **项目配置**：`.copilot/package-manager.json`
 3. **package.json**：`packageManager` 字段
 4. **锁文件**：package-lock.json、yarn.lock、pnpm-lock.yaml 或 bun.lockb 的存在
@@ -64,14 +64,14 @@ node scripts/setup-package-manager.js --list
 
 ## 环境变量
 
-设置 `CLAUDE_PACKAGE_MANAGER` 以覆盖所有其他检测方法：
+设置 `COPILOT_PACKAGE_MANAGER` 以覆盖所有其他检测方法：
 
 ```bash
 # Windows (PowerShell)
-$env:CLAUDE_PACKAGE_MANAGER = "pnpm"
+$env:COPILOT_PACKAGE_MANAGER = "pnpm"
 
 # macOS/Linux
-export CLAUDE_PACKAGE_MANAGER=pnpm
+export COPILOT_PACKAGE_MANAGER=pnpm
 ```
 
 ## 运行检测

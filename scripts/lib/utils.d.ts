@@ -15,7 +15,7 @@ export const isLinux: boolean;
 /** Get the user's home directory (cross-platform) */
 export function getHomeDir(): string;
 
-/** Get the Claude config directory (~/.claude) */
+/** Get the Copilot config directory (~/.copilot) */
 export function getClaudeDir(): string;
 
 /** Get the sessions directory (~/.copilot/sessions) */
@@ -48,7 +48,7 @@ export function getDateTimeString(): string;
 // --- Session/Project ---
 
 /**
- * Get short session ID from CLAUDE_SESSION_ID environment variable.
+ * Get short session ID from COPILOT_SESSION_ID environment variable.
  * Returns last 8 characters, falls back to project name then the provided fallback.
  */
 export function getSessionIdShort(fallback?: string): string;

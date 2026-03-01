@@ -1,9 +1,9 @@
 {
   "name": "ecc-universal",
   "version": "1.7.0",
-  "description": "Complete collection of battle-tested Claude Code configs — agents, skills, hooks, commands, and rules evolved over 10+ months of intensive daily use by an Anthropic hackathon winner",
+  "description": "Complete collection of battle-tested Copilot CLI configs — agents, skills, hooks, commands, and rules evolved over 10+ months of intensive daily use by an Anthropic hackathon winner",
   "keywords": [
-    "claude-code",
+    "copilot-cli",
     "ai",
     "agents",
     "skills",
@@ -71,8 +71,8 @@
     "scripts/skill-create-output.js",
     "skills/",
     "AGENTS.md",
-    ".claude-plugin/plugin.json",
-    ".claude-plugin/README.md",
+    "plugin.json",
+    "README.md",
     "install.sh",
     "llms.txt"
   ],

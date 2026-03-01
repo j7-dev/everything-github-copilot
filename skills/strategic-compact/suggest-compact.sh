@@ -28,9 +28,9 @@
 # - Plan has been finalized
 
 # Track tool call count (increment in a temp file)
-# Use CLAUDE_SESSION_ID for session-specific counter (not $$ which changes per invocation)
-SESSION_ID="${CLAUDE_SESSION_ID:-${PPID:-default}}"
-COUNTER_FILE="/tmp/claude-tool-count-${SESSION_ID}"
+# Use COPILOT_SESSION_ID for session-specific counter (not $$ which changes per invocation)
+SESSION_ID="${COPILOT_SESSION_ID:-${PPID:-default}}"
+COUNTER_FILE="/tmp/copilot-tool-count-${SESSION_ID}"
 THRESHOLD=${COMPACT_THRESHOLD:-50}
 
 # Initialize or increment counter

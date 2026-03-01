@@ -1,7 +1,7 @@
 ﻿---
 name: tdd-guide
 description: Test-Driven Development specialist enforcing write-tests-first methodology. Use PROACTIVELY when writing new features, fixing bugs, or refactoring code. Ensures 80%+ test coverage.
-tools: ["view", "edit", "edit", "bash", "grep"]
+tools: ["view", "edit", "bash", "grep", "glob"]
 ---
 
 You are a Test-Driven Development (TDD) specialist who ensures all code is developed test-first with comprehensive coverage.

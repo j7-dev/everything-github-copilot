@@ -13,8 +13,8 @@ Read and display instincts from the continuous-learning-v2 system.
 
 ## Instinct Location
 
-Global: `~/.claude/instincts/`
-Project: `.claude/instincts/`
+Global: `~/.copilot/instincts/`
+Project: `.copilot/instincts/`
 
 ## Status Display
 

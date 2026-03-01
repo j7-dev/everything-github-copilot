@@ -12,7 +12,7 @@
 
 ```bash
 # Add official Anthropic marketplace
-claude plugin marketplace add https://github.com/anthropics/claude-plugins-official
+claude plugin marketplace add https://github.com/anthropics/copilot-plugins-official
 
 # Add community marketplaces
 claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
@@ -22,7 +22,7 @@ claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
 
 | 市场 | 来源 |
 |-------------|--------|
-| claude-plugins-official | `anthropics/claude-plugins-official` |
+| copilot-plugins-official | `anthropics/copilot-plugins-official` |
 | copilot-cli-plugins | `anthropics/copilot-cli` |
 | Mixedbread-Grep | `mixedbread-ai/mgrep` |
 
@@ -35,7 +35,7 @@ claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
 /plugins
 
 # Or install directly
-claude plugin install typescript-lsp@claude-plugins-official
+claude plugin install typescript-lsp@copilot-plugins-official
 ```
 
 ### 推荐插件
@@ -70,7 +70,7 @@ claude plugin install typescript-lsp@claude-plugins-official
 
 ```bash
 # Add marketplaces
-claude plugin marketplace add https://github.com/anthropics/claude-plugins-official
+claude plugin marketplace add https://github.com/anthropics/copilot-plugins-official
 claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
 
 # Open /plugins and install what you need

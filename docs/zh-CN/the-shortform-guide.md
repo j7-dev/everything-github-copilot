@@ -149,7 +149,7 @@ MCP 将 Claude 直接连接到外部服务。它不是 API 的替代品——而
 # Check enabled MCPs
 /mcp
 
-# Disable unused ones in ~/.claude.json under projects.disabledMcpServers
+# Disable unused ones in ~/.copilot.json under projects.disabledMcpServers
 ```
 
 ***
@@ -174,9 +174,9 @@ claude plugin marketplace add https://github.com/mixedbread-ai/mgrep
 
 ```bash
 # Enabled plugins example
-typescript-lsp@claude-plugins-official  # TypeScript intelligence
-pyright-lsp@claude-plugins-official     # Python type checking
-hookify@claude-plugins-official         # Create hooks conversationally
+typescript-lsp@copilot-plugins-official  # TypeScript intelligence
+pyright-lsp@copilot-plugins-official     # Python type checking
+hookify@copilot-plugins-official         # Create hooks conversationally
 mgrep@Mixedbread-Grep                   # Better search than ripgrep
 ```
 
@@ -295,14 +295,14 @@ frontend-design@copilot-cli-plugins    # UI/UX 模式
 commit-commands@copilot-cli-plugins    # Git 工作流
 security-guidance@copilot-cli-plugins  # 安全检查
 pr-review-toolkit@copilot-cli-plugins  # PR 自动化
-typescript-lsp@claude-plugins-official # TS 智能
-hookify@claude-plugins-official        # Hook 创建
-code-simplifier@claude-plugins-official
+typescript-lsp@copilot-plugins-official # TS 智能
+hookify@copilot-plugins-official        # Hook 创建
+code-simplifier@copilot-plugins-official
 feature-dev@copilot-cli-plugins
 explanatory-output-style@copilot-cli-plugins
 code-review@copilot-cli-plugins
-context7@claude-plugins-official       # 实时文档
-pyright-lsp@claude-plugins-official    # Python 类型
+context7@copilot-plugins-official       # 实时文档
+pyright-lsp@copilot-plugins-official    # Python 类型
 mgrep@Mixedbread-Grep                  # 更好的搜索
 
 ```

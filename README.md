@@ -127,10 +127,10 @@ Automated lifecycle hooks in `hooks/hooks.json`:
 Language-specific rules auto-applied by Copilot:
 
 - `.github/copilot-instructions.md` — Global rules
-- `.github/typescript.instructions.md` — TypeScript/TSX files
-- `.github/go.instructions.md` — Go files
-- `.github/python.instructions.md` — Python files
-- `.github/swift.instructions.md` — Swift files
+- `.github/instructions/typescript.instructions.md` — TypeScript/TSX files
+- `.github/instructions/go.instructions.md` — Go files
+- `.github/instructions/python.instructions.md` — Python files
+- `.github/instructions/swift.instructions.md` — Swift files
 
 ---
 

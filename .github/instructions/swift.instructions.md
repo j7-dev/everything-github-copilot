@@ -2,11 +2,6 @@
 applyTo: "**/*.swift"
 ---
 
----
-paths:
-  - "**/*.swift"
-  - "**/Package.swift"
----
 # Swift Coding Style
 
 > This file extends [common/coding-style.md](../common/coding-style.md) with Swift specific content.
@@ -50,13 +45,7 @@ Enable Swift 6 strict concurrency checking. Prefer:
 - Actors for shared mutable state
 - Structured concurrency (`async let`, `TaskGroup`) over unstructured `Task {}`
 
----
 
----
-paths:
-  - "**/*.swift"
-  - "**/Package.swift"
----
 # Swift Patterns
 
 > This file extends [common/patterns.md](../common/patterns.md) with Swift specific content.
@@ -119,13 +108,7 @@ struct UserService {
 See skill: `swift-actor-persistence` for actor-based persistence patterns.
 See skill: `swift-protocol-di-testing` for protocol-based DI and testing.
 
----
 
----
-paths:
-  - "**/*.swift"
-  - "**/Package.swift"
----
 # Swift Security
 
 > This file extends [common/security.md](../common/security.md) with Swift specific content.
@@ -155,13 +138,7 @@ guard let apiKey, !apiKey.isEmpty else {
 - Use `URL(string:)` with validation rather than force-unwrapping
 - Validate data from external sources (APIs, deep links, pasteboard) before processing
 
----
 
----
-paths:
-  - "**/*.swift"
-  - "**/Package.swift"
----
 # Swift Testing
 
 > This file extends [common/testing.md](../common/testing.md) with Swift specific content.
@@ -202,5 +179,3 @@ swift test --enable-code-coverage
 ## Reference
 
 See skill: `swift-protocol-di-testing` for protocol-based dependency injection and mock patterns with Swift Testing.
-
----

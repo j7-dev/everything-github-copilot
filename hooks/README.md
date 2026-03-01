@@ -1,6 +1,6 @@
 # Hooks
 
-Hooks are event-driven automations that fire before or after Claude Code tool executions. They enforce code quality, catch mistakes early, and automate repetitive checks.
+Hooks are event-driven automations that fire before or after Copilot CLI tool executions. They enforce code quality, catch mistakes early, and automate repetitive checks.
 
 ## How Hooks Work
 
@@ -50,7 +50,7 @@ User request → Claude picks a tool → PreToolUse hook runs → Tool executes 
 
 ### Disabling a Hook
 
-Remove or comment out the hook entry in `hooks.json`. If installed as a plugin, override in your `~/.claude/settings.json`:
+Remove or comment out the hook entry in `hooks.json`. If installed as a plugin, override in your `~/.copilot/settings.json`:
 
 ```json
 {
