@@ -1,0 +1,61 @@
+# Angular UI: Basic Theme
+
+> 來源：https://abp.io/docs/9.3/framework/ui/angular/basic-theme
+
+# Angular UI: Basic Theme
+
+The Basic Theme is a theme implementation for the Angular UI. It is a minimalist theme that doesn't add any styling on top of the plain Bootstrap . You can take the Basic Theme as the base theme and build your own theme or styling on top of it. See the Customization section.
+
+> 
+If you are looking for a professional, enterprise ready theme, you can check the Lepton Theme , which is a part of the ABP .
+
+> 
+See the Theming document to learn about themes.
+
+## Installation
+
+If you need to manually this theme, follow the steps below:
+
+- Install the @abp/ng.theme.basic NPM package to your Angular project.
+- Open the src/app/app.config.ts file, import provideThemeBasicConfig (it can be imported from @abp/ng.theme.basic package), and provide provideThemeBasicConfig() to the providers array.
+
+The BASIC_THEME_STYLES_PROVIDERS has registered three layouts being ApplicationLayoutComponent , AccountLayoutComponent , and EmptyLayoutComponent . These are provided inside provideThemeBasicConfig() function that is exposed by @abp/ng.theme.basic package on application initialization.
+
+## Application Layout
+
+Application Layout implements the following parts, in addition to the common parts mentioned above;
+
+- Logo area
+- Routes area
+- Language selection & user menu
+- Page Alerts
+
+See Application Layout components:
+
+### How to Use a Layout
+
+Routes should be added to the menu by calling add method RoutesService . A layout can be set in the object of your route. See the modifying the menu for more information.
+
+## Customization
+
+You have two options two customize this theme:
+
+### Overriding Styles / Components
+
+In this approach, you continue to use the theme as an NPM package and customize the parts you need to. There are several ways to customize it;
+
+#### Override the Styles
+
+You can simply override the styles in the global styles ( src/styles.scss ) file of your application.
+
+#### Override the Components
+
+See the Component Replacement to learn how you can replace components, customize and extend the user interface.
+
+### Copy & Customize
+
+You can run the following ABP CLI command in Angular project directory to copy the source code to your solution:
+
+abp add-package @abp/ng.theme.basic --with-source-code
+
+---

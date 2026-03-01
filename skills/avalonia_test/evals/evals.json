@@ -1,0 +1,85 @@
+{
+  "skill_name": "avalonia_test",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "我有一個 Avalonia 11 的 Window，裡面有一個 TextBox 和一個 Button。當使用者在 TextBox 輸入文字後點擊 Button，會觸發 ViewModel 的 SubmitCommand 並清空 TextBox。請幫我用 xUnit + Avalonia.Headless.XUnit 寫完整的 headless 測試，包含專案設定範本。",
+      "expected_output": "完整可編譯的測試程式碼，包含：TestApp.cs（含 FluentTheme）、AssemblyInfo.cs（含 AvaloniaTestApplication）、使用 [AvaloniaFact] 而非 [Fact]、textBox.Focus() 在輸入前、KeyTextInput()、ForceRenderTimerTick()、window.Show() 和 window.Close()",
+      "assertions": [
+        {
+          "name": "使用 [AvaloniaFact] 而非 [Fact]",
+          "description": "測試方法必須標記 [AvaloniaFact]，不能用 [Fact]"
+        },
+        {
+          "name": "包含 AvaloniaTestApplication 組裝屬性",
+          "description": "程式碼中應有 [assembly: AvaloniaTestApplication(typeof(...))]"
+        },
+        {
+          "name": "TestApp 包含 Theme",
+          "description": "TestApp.Initialize() 中應加入 FluentTheme 或其他 theme"
+        },
+        {
+          "name": "包含 UseHeadless() 初始化",
+          "description": "AppBuilder 鏈中應有 UseHeadless(new AvaloniaHeadlessPlatformOptions{...})"
+        },
+        {
+          "name": "輸入前有 Focus()",
+          "description": "KeyTextInput 之前應呼叫 textBox.Focus()"
+        },
+        {
+          "name": "包含 ForceRenderTimerTick",
+          "description": "輸入或點擊後應呼叫 AvaloniaHeadlessPlatform.ForceRenderTimerTick()"
+        },
+        {
+          "name": "包含 window.Show() 與 window.Close()",
+          "description": "測試中應有 window.Show() 開啟視窗，結束後 window.Close()"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "我有一個 Avalonia 11 的 ListBox，ItemsSource 綁定到 ViewModel 的 ObservableCollection<string>。我想測試：1) 初始顯示正確數量的項目，2) 點擊某個項目後 SelectedItem 更新。不需要整個專案設定，只要測試方法就好，假設 TestApp 已設定完成。",
+      "expected_output": "使用 [AvaloniaFact] 的測試方法，包含 ListBox 初始化與 ViewModel binding、MouseDown 模擬點擊、ForceRenderTimerTick、以及對 SelectedItem 的斷言",
+      "assertions": [
+        {
+          "name": "使用 [AvaloniaFact]",
+          "description": "測試方法標記 [AvaloniaFact]"
+        },
+        {
+          "name": "使用 MouseDown 模擬點擊",
+          "description": "應使用 window.MouseDown() 或類似方法模擬點擊"
+        },
+        {
+          "name": "斷言 SelectedItem 或 SelectedIndex",
+          "description": "應有對 ListBox.SelectedItem 或 SelectedIndex 的 Assert"
+        },
+        {
+          "name": "包含 ForceRenderTimerTick",
+          "description": "操作後應刷新 render tick"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "我的 CounterViewModel 有一個 Count 屬性和 IncrementCommand。我想單獨測試這個 ViewModel 的邏輯，不涉及 UI 控制項。請幫我寫測試。",
+      "expected_output": "純 C# 的 [Fact] 測試（不是 [AvaloniaFact]），只測試 ViewModel 邏輯，不需要 headless 設定",
+      "assertions": [
+        {
+          "name": "使用 [Fact] 而非 [AvaloniaFact]",
+          "description": "ViewModel 純邏輯測試應使用標準 [Fact]，不需要 Avalonia 執行環境"
+        },
+        {
+          "name": "不包含 window.Show()",
+          "description": "ViewModel 測試不需要開 Window"
+        },
+        {
+          "name": "斷言 Count 屬性變化",
+          "description": "應驗證 IncrementCommand 執行後 Count 增加"
+        }
+      ],
+      "files": []
+    }
+  ]
+}
