@@ -1,29 +1,29 @@
 {
-	"name": "everything-copilot-cli",
-	"description": "Complete collection of battle-tested GitHub Copilot CLI configs - agents, skills, hooks, and instructions evolved over 10+ months of intensive daily use",
-	"version": "2.0.1",
-	"author": {
-		"name": "j7-dev",
-		"url": "https://github.com/j7-dev"
-	},
-	"homepage": "https://github.com/j7-dev/everything-github-copilot",
-	"repository": "https://github.com/j7-dev/everything-github-copilot",
-	"source": "j7-dev/everything-github-copilot",
-	"license": "MIT",
-	"keywords": [
-		"copilot-cli",
-		"agents",
-		"skills",
-		"hooks",
-		"tdd",
-		"code-review",
-		"security",
-		"workflow",
-		"automation",
-		"best-practices"
-	],
-	"agents": "agents/",
-	"skills": "skills/",
-	"commands": "commands/",
-	"hooks": "hooks/hooks.json"
+  "name": "j7-dev/everything-github-copilot",
+  "description": "Complete collection of battle-tested GitHub Copilot CLI configs - agents, skills, hooks, and instructions evolved over 10+ months of intensive daily use",
+  "version": "2.0.1",
+  "author": {
+    "name": "j7-dev",
+    "url": "https://github.com/j7-dev"
+  },
+  "homepage": "https://github.com/j7-dev/everything-github-copilot",
+  "repository": "https://github.com/j7-dev/everything-github-copilot",
+  "source": "j7-dev/everything-github-copilot",
+  "license": "MIT",
+  "keywords": [
+    "copilot-cli",
+    "agents",
+    "skills",
+    "hooks",
+    "tdd",
+    "code-review",
+    "security",
+    "workflow",
+    "automation",
+    "best-practices"
+  ],
+  "agents": "agents/",
+  "skills": "skills/",
+  "commands": "commands/",
+  "hooks": "hooks/hooks.json"
 }
