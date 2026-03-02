@@ -1,18 +1,18 @@
 {
-  "name": "j7-dev",
-  "owner": {
-    "name": "j7-dev"
-  },
-  "metadata": {
-    "description": "Complete collection of battle-tested GitHub Copilot CLI configs - agents, skills, hooks, and instructions evolved over 10+ months of intensive daily use",
-    "homepage": "https://github.com/j7-dev/everything-github-copilot"
-  },
-  "plugins": [
-    {
-      "name": "j7-dev/everything-github-copilot",
-      "version": "2.0.1",
-      "source": ".",
-      "description": "Complete collection of battle-tested GitHub Copilot CLI configs - agents, skills, hooks, and instructions evolved over 10+ months of intensive daily use"
-    }
-  ]
+	"name": "j7-dev",
+	"owner": {
+		"name": "j7-dev"
+	},
+	"metadata": {
+		"description": "Complete collection of battle-tested GitHub Copilot CLI configs - agents, skills, hooks, and instructions evolved over 10+ months of intensive daily use",
+		"homepage": "https://github.com/j7-dev/everything-github-copilot"
+	},
+	"plugins": [
+		{
+			"name": "j7-dev/everything-github-copilot",
+			"version": "2.0.2",
+			"source": ".",
+			"description": "Complete collection of battle-tested GitHub Copilot CLI configs - agents, skills, hooks, and instructions evolved over 10+ months of intensive daily use"
+		}
+	]
 }
