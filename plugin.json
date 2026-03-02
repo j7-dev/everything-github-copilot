@@ -1,7 +1,7 @@
 {
 	"name": "j7-dev/everything-github-copilot",
 	"description": "Complete collection of battle-tested GitHub Copilot CLI configs - agents, skills, hooks, and instructions evolved over 10+ months of intensive daily use",
-	"version": "2.0.2",
+	"version": "2.0.3",
 	"author": {
 		"name": "j7-dev",
 		"url": "https://github.com/j7-dev"
