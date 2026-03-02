@@ -11,7 +11,7 @@
 舊版安裝者請依下列步驟重新安裝：
 
 ```bash
-copilot plugin remove everything-copilot-cli
+copilot plugin remove j7-dev/everything-github-copilot
 copilot plugin install j7-dev/everything-github-copilot
 ```
 
