@@ -42,9 +42,22 @@ Guidelines:
 - Avoid heavy side effects at file load time; load on hooks.
 - Prefer a dedicated loader/class to register hooks.
 - Keep admin-only code behind `is_admin()` (or admin hooks) to reduce frontend overhead.
+- Add `declare(strict_types=1)` at the top of every PHP file.
+- Follow naming conventions: snake_case for variables/functions/methods, PascalCase for classes, UPPER_SNAKE_CASE for constants.
 
 See:
 - `references/structure.md`
+
+### 1a) PHP code style
+
+- Require `declare(strict_types=1)` at the top of every file.
+- Follow naming conventions (see reference).
+- Use Heredoc/Nowdoc for all multi-line HTML output; never use `.` string concatenation for HTML.
+- Class structure: properties → constructor → register_hooks → public → private.
+- Default to static methods with `register_hooks()` for hook registration.
+
+See:
+- `references/php-code-style.md`
 
 ### 2) Hooks and lifecycle (activation/deactivation/uninstall)
 
@@ -94,6 +107,7 @@ See:
 - Settings save and read correctly (capability + nonce enforced).
 - Uninstall removes intended data (and nothing else).
 - Run repo lint/tests (PHPUnit/PHPCS if present) and any JS build steps if the plugin ships assets.
+- Run `composer lint` (phpcs) and `composer analyse` (phpstan) if available.
 
 ## Failure modes / debugging
 
