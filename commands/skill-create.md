@@ -1,28 +1,26 @@
 ---
 name: skill-create
-description: Analyze local git history to extract coding patterns and generate SKILL.md files. Local version of the Skill Creator GitHub App.
+description: Analyze local git history to extract coding patterns and generate SKILL.md files for Copilot CLI.
 allowed_tools: ["Bash", "Read", "Write", "Grep", "Glob"]
 ---
 
-# /skill-create - Local Skill Generation
+# /skill-create - Skill Generation from Git History
 
-Analyze your repository's git history to extract coding patterns and generate SKILL.md files that teach Claude your team's practices.
+Analyze your repository's git history to extract coding patterns and generate `SKILL.md` files that teach Copilot your team's practices.
 
 ## Usage
 
 ```bash
-/skill-create                    # Analyze current repo
+/skill-create                    # Analyze current repo (default: 200 commits)
 /skill-create --commits 100      # Analyze last 100 commits
-/skill-create --output ./skills  # Custom output directory
-/skill-create --instincts        # Also generate instincts for continuous-learning-v2
+/skill-create --output ./skills  # Custom output directory (default: .copilot/skills/)
 ```
 
 ## What It Does
 
-1. **Parses Git History** - Analyzes commits, file changes, and patterns
-2. **Detects Patterns** - Identifies recurring workflows and conventions
-3. **Generates SKILL.md** - Creates valid Copilot CLI skill files
-4. **Optionally Creates Instincts** - For the continuous-learning-v2 system
+1. **Parses Git History** — Analyzes commits, file changes, and patterns
+2. **Detects Patterns** — Identifies recurring workflows and conventions
+3. **Generates SKILL.md** — Creates valid Copilot CLI skill files in the correct directory structure
 
 ## Analysis Steps
 
@@ -41,8 +39,6 @@ git log --oneline -n 200 | cut -d' ' -f2- | head -50
 
 ### Step 2: Detect Patterns
 
-Look for these pattern types:
-
 | Pattern | Detection Method |
 |---------|-----------------|
 | **Commit conventions** | Regex on commit messages (feat:, fix:, chore:) |
@@ -51,17 +47,22 @@ Look for these pattern types:
 | **Architecture** | Folder structure and naming conventions |
 | **Testing patterns** | Test file locations, naming, coverage |
 
-### Step 3: Generate SKILL.md
+### Step 3: Generate Skill Directory
 
-Output format:
+Skills must follow the directory structure: `<output>/<skill-name>/SKILL.md`
+
+```
+.copilot/skills/
+└── {repo-name}-patterns/
+    └── SKILL.md
+```
+
+Output `SKILL.md` format (following the [Agent Skills](https://agentskills.io) open standard):
 
 ```markdown
 ---
 name: {repo-name}-patterns
-description: Coding patterns extracted from {repo-name}
-version: 1.0.0
-source: local-git-analysis
-analyzed_commits: {count}
+description: Coding patterns extracted from {repo-name} git history ({count} commits analyzed)
 ---
 
 # {Repo Name} Patterns
@@ -79,40 +80,24 @@ analyzed_commits: {count}
 {detected test conventions}
 ```
 
-### Step 4: Generate Instincts (if --instincts)
+### Frontmatter Fields (Official Spec)
 
-For continuous-learning-v2 integration:
-
-```yaml
----
-id: {repo}-commit-convention
-trigger: "when writing a commit message"
-confidence: 0.8
-domain: git
-source: local-repo-analysis
----
-
-# Use Conventional Commits
-
-## Action
-Prefix commits with: feat:, fix:, chore:, docs:, test:, refactor:
-
-## Evidence
-- Analyzed {n} commits
-- {percentage}% follow conventional commit format
-```
+| Field | Description |
+|-------|-------------|
+| `name` | Skill name — lowercase letters, numbers, hyphens (max 64 chars) |
+| `description` | What the skill does; used by Claude to decide when to apply it |
+| `disable-model-invocation` | Set `true` to prevent auto-loading; use for manual-trigger workflows |
+| `allowed-tools` | Tools Claude can use without asking when this skill is active |
+| `context: fork` | Run in a forked subagent context |
 
 ## Example Output
 
-Running `/skill-create` on a TypeScript project might produce:
+Running `/skill-create` on a TypeScript project produces `.copilot/skills/my-app-patterns/SKILL.md`:
 
 ```markdown
 ---
 name: my-app-patterns
-description: Coding patterns from my-app repository
-version: 1.0.0
-source: local-git-analysis
-analyzed_commits: 150
+description: Coding patterns from my-app repository — conventional commits, component structure, Vitest testing
 ---
 
 # My App Patterns
@@ -120,21 +105,19 @@ analyzed_commits: 150
 ## Commit Conventions
 
 This project uses **conventional commits**:
-- `feat:` - New features
-- `fix:` - Bug fixes
-- `chore:` - Maintenance tasks
-- `docs:` - Documentation updates
+- `feat:` — New features
+- `fix:` — Bug fixes
+- `chore:` — Maintenance tasks
+- `docs:` — Documentation updates
 
 ## Code Architecture
 
-```
 src/
 ├── components/     # React components (PascalCase.tsx)
 ├── hooks/          # Custom hooks (use*.ts)
 ├── utils/          # Utility functions
 ├── types/          # TypeScript type definitions
 └── services/       # API and external services
-```
 
 ## Workflows
 
@@ -155,20 +138,20 @@ src/
 - Framework: Vitest
 ```
 
-## GitHub App Integration
+## Skill Locations
 
-For advanced features (10k+ commits, team sharing, auto-PRs), use the [Skill Creator GitHub App](https://github.com/apps/skill-creator):
+After generation, you can install skills to:
 
-- Install: [github.com/apps/skill-creator](https://github.com/apps/skill-creator)
-- Comment `/skill-creator analyze` on any issue
-- Receives PR with generated skills
+| Location | Path | Scope |
+|----------|------|-------|
+| Project | `.copilot/skills/<skill-name>/SKILL.md` | Current project only |
+| Personal | `~/.copilot/skills/<skill-name>/SKILL.md` | All your projects |
 
 ## Related Commands
 
-- `/instinct-import` - Import generated instincts
-- `/instinct-status` - View learned instincts
-- `/evolve` - Cluster instincts into skills/agents
+- `/learn` — Extract patterns from the current session
+- `/skill-creator` — Interactive skill creation wizard
 
 ---
 
-*Part of [Everything Copilot CLI](https://github.com/affaan-m/everything-claude-code)*
+*Part of [Everything Copilot CLI](https://github.com/j7-dev/everything-github-copilot)*
